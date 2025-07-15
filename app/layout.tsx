@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Lakshmi Ayurveda',
+  description: 'Experience authentic Ayurvedic healing and wellness treatments in a serene environment. Our expert practitioners offer traditional therapies for holistic health and rejuvenation.',
+  generator: 'Next.js',
 }
 
 export default function RootLayout({
