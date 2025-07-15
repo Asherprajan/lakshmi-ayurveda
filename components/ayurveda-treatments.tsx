@@ -9,7 +9,7 @@ const treatments = [
   {
     id: 1,
     name: "Chavitti Tirumal",
-    icon: Hand,git init
+    icon: Hand,
     color: "#E74C3C",
     description:
       "A traditional Kerala massage performed with the feet, using controlled pressure and rhythmic movements to release deep-seated tension and improve circulation.",
@@ -72,27 +72,21 @@ export default function AyurvedaTreatments() {
   const [selectedTreatment, setSelectedTreatment] = useState<number | null>(null)
 
   return (
-    <section className="bg-gradient-to-br from-[#6A4C3B] to-[#8D5E3C] py-20 px-4 min-h-screen flex items-center">
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="text-center mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-5xl font-bold mb-6 text-[#F5ECE0] font-serif"
-          >
+    <section className="bg-gradient-to-br from-[#6A4C3B] to-[#8D5E4C] py-20 px-4 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-5xl font-bold mb-6 text-[#F5ECE0] font-serif">
             Ayurveda Treatments
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-xl max-w-3xl mx-auto text-[#F5ECE0] text-opacity-90"
-          >
-            Experience authentic healing through time-tested Ayurvedic therapies, each designed to restore balance and
-            promote holistic wellness.
-          </motion.p>
-        </div>
+          </h2>
+          <p className="text-xl max-w-3xl mx-auto text-[#F5ECE0] opacity-90">
+            Experience authentic healing through time-tested Ayurvedic therapies, each designed to restore balance and promote holistic wellness.
+          </p>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {treatments.map((treatment) => (
@@ -100,22 +94,22 @@ export default function AyurvedaTreatments() {
               key={treatment.id}
               layoutId={`treatment-card-${treatment.id}`}
               className="relative"
-              onClick={() => setSelectedTreatment(treatment.id)}
+              onClick={() => setSelectedTreatment(selectedTreatment === treatment.id ? null : treatment.id)}
             >
               <Card 
-                className="cursor-pointer h-full transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                 style={{ 
                   backgroundColor: selectedTreatment === treatment.id ? treatment.color : '#F5ECE0',
                   color: selectedTreatment === treatment.id ? '#FFFFFF' : '#3C1F0F'
                 }}
               >
-                <CardContent className="p-6 flex flex-col h-full">
+                <CardContent className="p-6">
                   <div className="flex items-center mb-4">
                     <div 
-                      className="p-3 rounded-full mr-4 transition-colors duration-300"
+                      className="p-3 rounded-full mr-4 transition-colors"
                       style={{ 
-                        backgroundColor: treatment.color,
-                        color: '#F5ECE0'
+                        backgroundColor: selectedTreatment === treatment.id ? 'rgba(255,255,255,0.2)' : treatment.color,
+                        color: selectedTreatment === treatment.id ? '#FFFFFF' : '#F5ECE0'
                       }}
                     >
                       <treatment.icon className="w-8 h-8" />
@@ -126,7 +120,7 @@ export default function AyurvedaTreatments() {
                   </div>
 
                   {selectedTreatment !== treatment.id && (
-                    <p className="text-sm mt-auto opacity-70">
+                    <p className="text-sm opacity-70 mt-2">
                       Click to explore treatment details
                     </p>
                   )}
@@ -139,61 +133,70 @@ export default function AyurvedaTreatments() {
         <AnimatePresence>
           {selectedTreatment && (
             <motion.div 
+              layoutId={`treatment-card-${selectedTreatment}`}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4"
               onClick={() => setSelectedTreatment(null)}
             >
               <motion.div 
-                layoutId={`treatment-card-${selectedTreatment}`}
-                className="max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden"
-                onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                className="max-w-2xl w-full bg-white rounded-2xl shadow-2xl p-8"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
               >
-                {treatments.find(t => t.id === selectedTreatment)!.description && (
-                  <div className="p-8">
+                {selectedTreatment && (
+                  <>
                     <div className="flex items-center mb-6">
                       <div 
                         className="p-4 rounded-full mr-6"
                         style={{ 
-                          backgroundColor: treatments.find(t => t.id === selectedTreatment)!.color,
-                          color: '#F5ECE0'
+                          backgroundColor: treatments.find(t => t.id === selectedTreatment)?.color,
+                          color: '#FFFFFF'
                         }}
                       >
                         {React.createElement(treatments.find(t => t.id === selectedTreatment)!.icon, { className: "w-12 h-12" })}
                       </div>
-                      <h3 className="text-3xl font-bold text-[#3C1F0F]">
-                        {treatments.find(t => t.id === selectedTreatment)!.name}
+                      <h3 className="text-3xl font-bold font-serif text-[#3C1F0F]">
+                        {treatments.find(t => t.id === selectedTreatment)?.name}
                       </h3>
                     </div>
-
-                    <p className="text-lg mb-6 text-[#3C1F0F]">
-                      {treatments.find(t => t.id === selectedTreatment)!.description}
-                    </p>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <h4 className="font-semibold mb-2 text-[#B24D1F]">Duration</h4>
-                        <p className="text-[#3C1F0F]">
-                          {treatments.find(t => t.id === selectedTreatment)!.duration}
-                        </p>
+                    
+                    <div className="space-y-4">
+                      <p className="text-[#3C1F0F] leading-relaxed">
+                        {treatments.find(t => t.id === selectedTreatment)?.description}
+                      </p>
+                      
+                      <div className="flex items-center text-[#B24D1F]">
+                        <span className="font-semibold">Duration: </span>
+                        <span className="ml-2">
+                          {treatments.find(t => t.id === selectedTreatment)?.duration}
+                        </span>
                       </div>
+                      
                       <div>
-                        <h4 className="font-semibold mb-2 text-[#B24D1F]">Benefits</h4>
-                        <ul className="space-y-1">
-                          {treatments.find(t => t.id === selectedTreatment)!.benefits.map((benefit, index) => (
-                            <li key={index} className="flex items-center text-[#3C1F0F]">
-                              <span 
-                                className="w-2 h-2 rounded-full mr-2"
-                                style={{ backgroundColor: treatments.find(t => t.id === selectedTreatment)!.color }}
-                              ></span>
+                        <h4 className="font-semibold mb-2 text-[#3C1F0F]">Benefits:</h4>
+                        <ul className="space-y-2">
+                          {treatments.find(t => t.id === selectedTreatment)?.benefits.map((benefit, index) => (
+                            <li 
+                              key={index} 
+                              className="flex items-center text-[#3C1F0F]"
+                            >
+                              <div 
+                                className="w-2 h-2 rounded-full mr-3"
+                                style={{ 
+                                  backgroundColor: treatments.find(t => t.id === selectedTreatment)?.color 
+                                }}
+                              />
                               {benefit}
                             </li>
                           ))}
                         </ul>
                       </div>
                     </div>
-                  </div>
+                  </>
                 )}
               </motion.div>
             </motion.div>
