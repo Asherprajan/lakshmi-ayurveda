@@ -63,17 +63,15 @@ export default function OnamEvents() {
           {/* Video Side */}
           <div className="relative">
             <div className="relative overflow-hidden rounded-3xl">
-              <div
-                className="aspect-video bg-gradient-to-br from-orange-400 to-red-600 flex items-center justify-center cursor-pointer group"
-                style={{ backgroundColor: "#F1AD60" }}
-              >
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                    <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
-                  </div>
-                  <p className="font-sans-custom text-white text-lg font-semibold">Watch Onam Celebrations</p>
-                </div>
-              </div>
+              <video
+                className="w-full aspect-video object-cover"
+                src="/video.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                poster="/video-thumbnail.jpg"
+              />
             </div>
 
             {/* Decorative elements */}

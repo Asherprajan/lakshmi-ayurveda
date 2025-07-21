@@ -3,68 +3,68 @@
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
-import { Flower, Droplets, Hand, Leaf, Sun, Moon } from "lucide-react"
+import { Heart, Brain, Scale, Shield, Activity, Flower } from "lucide-react"
 
 const treatments = [
   {
     id: 1,
-    name: "Chavitti Tirumal",
-    icon: Hand,
+    name: "Panchakarma",
+    icon: Heart,
     color: "#E74C3C",
-    description:
-      "A traditional Kerala massage performed with the feet, using controlled pressure and rhythmic movements to release deep-seated tension and improve circulation.",
-    duration: "90 minutes",
-    benefits: ["Deep tissue relief", "Improved flexibility", "Enhanced circulation"],
+    description: "A deep detoxification therapy to cleanse the body of toxins, balance the doshas (body energies), and restore optimal health through five traditional purification methods.",
+    duration: "14-21 days",
+    benefits: ["Deep cleansing", "Restored balance", "Improved vitality"],
+    image: "/panchakarma.jpeg"
   },
   {
     id: 2,
-    name: "Sirodhara",
-    icon: Droplets,
+    name: "Stress & Anxiety Management",
+    icon: Brain,
     color: "#3498DB",
-    description:
-      "The signature Ayurvedic treatment where warm herbal oil is poured in a continuous stream over the forehead, inducing deep relaxation and mental clarity.",
-    duration: "60 minutes",
-    benefits: ["Stress relief", "Mental clarity", "Better sleep"],
+    description: "Tailored treatments using calming oils, Shirodhara, and relaxation therapies to soothe the nervous system, reduce anxiety, and promote mental clarity.",
+    duration: "7-14 days", 
+    benefits: ["Mental clarity", "Anxiety relief", "Nervous system balance"],
+    image: "/stress.jpeg"
   },
   {
     id: 3,
-    name: "Abhyanga",
-    icon: Leaf,
-    color: "#2ECC71",
-    description:
-      "A full-body massage with warm herbal oils, synchronized with breathing and performed by two therapists to balance the doshas and nourish the skin.",
-    duration: "75 minutes",
-    benefits: ["Dosha balancing", "Skin nourishment", "Muscle relaxation"],
+    name: "Weight Management",
+    icon: Scale,
+    color: "#2ECC71", 
+    description: "A holistic program focusing on Ayurvedic diet, herbal medicines, massage, and lifestyle practices to support healthy and sustainable weight loss.",
+    duration: "21-28 days",
+    benefits: ["Healthy weight loss", "Improved metabolism", "Sustainable habits"],
+    image: "/weight.jpeg"
   },
   {
     id: 4,
-    name: "Panchakarma",
-    icon: Flower,
-    color: "#9B59B6",
-    description:
-      "A comprehensive detoxification program that cleanses the body of toxins and restores natural balance through five therapeutic procedures.",
-    duration: "7-21 days",
-    benefits: ["Complete detox", "Immunity boost", "Rejuvenation"],
+    name: "Rejuvenation & Immunity",
+    icon: Shield,
+    color: "#9B59B6", 
+    description: "Designed to revitalize the body, strengthen immunity, and improve energy levels using nourishing therapies and Rasayana (rejuvenating) herbs.",
+    duration: "14 days",
+    benefits: ["Enhanced immunity", "Increased vitality", "Cellular rejuvenation"],
+    image: "/rejuvination.jpeg"
   },
   {
     id: 5,
-    name: "Nasya",
-    icon: Sun,
-    color: "#F39C12",
-    description:
-      "Nasal administration of medicated oils and herbal preparations to cleanse the head and neck region, improving respiratory health.",
-    duration: "45 minutes",
-    benefits: ["Respiratory health", "Mental clarity", "Sinus relief"],
+    name: "Joint Pain & Arthritis",
+    icon: Activity,
+    color: "#F39C12", 
+    description: "Effective therapies like Abhyanga (oil massage), Pizhichil, and herbal steam to relieve joint stiffness, reduce inflammation, and support mobility.",
+    duration: "14-21 days",
+    benefits: ["Pain relief", "Improved mobility", "Joint health"],
+    image: "/joint.jpeg"
   },
   {
     id: 6,
-    name: "Karna Purana",
-    icon: Moon,
-    color: "#34495E",
-    description:
-      "Therapeutic ear treatment using warm medicated oils to improve hearing, reduce ear infections, and promote overall ear health.",
-    duration: "30 minutes",
-    benefits: ["Ear health", "Hearing improvement", "Infection prevention"],
+    name: "Women's Health",
+    icon: Flower,
+    color: "#34495E", 
+    description: "Customized Ayurvedic care for hormonal balance, menstrual issues, fertility, postpartum recovery, and overall wellness in every phase of a woman's life.",
+    duration: "14-28 days",
+    benefits: ["Hormonal harmony", "Fertility support", "Postpartum healing"],
+    image: "/women.jpeg"
   },
 ]
 
@@ -81,10 +81,10 @@ export default function AyurvedaTreatments() {
           className="text-center mb-16"
         >
           <h2 className="text-5xl font-bold mb-6 text-[#F5ECE0] font-serif">
-            Ayurveda Treatments
+            Ayurvedic Treatment Packages
           </h2>
           <p className="text-xl max-w-3xl mx-auto text-[#F5ECE0] opacity-90">
-            Experience authentic healing through time-tested Ayurvedic therapies, each designed to restore balance and promote holistic wellness.
+            Discover our specialized Ayurvedic treatment packages, each carefully designed to address specific health concerns and promote holistic healing.
           </p>
         </motion.div>
 
@@ -93,35 +93,48 @@ export default function AyurvedaTreatments() {
             <motion.div
               key={treatment.id}
               layoutId={`treatment-card-${treatment.id}`}
-              className="relative"
+              className="relative h-full"
               onClick={() => setSelectedTreatment(selectedTreatment === treatment.id ? null : treatment.id)}
             >
               <Card 
-                className="cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden h-full flex flex-col"
                 style={{ 
                   backgroundColor: selectedTreatment === treatment.id ? treatment.color : '#F5ECE0',
                   color: selectedTreatment === treatment.id ? '#FFFFFF' : '#3C1F0F'
                 }}
               >
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div 
-                      className="p-3 rounded-full mr-4 transition-colors"
-                      style={{ 
-                        backgroundColor: selectedTreatment === treatment.id ? 'rgba(255,255,255,0.2)' : treatment.color,
-                        color: selectedTreatment === treatment.id ? '#FFFFFF' : '#F5ECE0'
-                      }}
-                    >
-                      <treatment.icon className="w-8 h-8" />
+                <div className="h-48 overflow-hidden flex-shrink-0">
+                  <img 
+                    src={treatment.image} 
+                    alt={treatment.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <CardContent className="p-6 flex-grow flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center mb-4">
+                      <div 
+                        className="p-3 rounded-full mr-4 transition-colors"
+                        style={{ 
+                          backgroundColor: selectedTreatment === treatment.id ? 'rgba(255,255,255,0.2)' : treatment.color,
+                          color: selectedTreatment === treatment.id ? '#FFFFFF' : '#F5ECE0'
+                        }}
+                      >
+                        <treatment.icon className="w-8 h-8" />
+                      </div>
+                      <h3 className="text-2xl font-semibold font-serif">
+                        {treatment.name}
+                      </h3>
                     </div>
-                    <h3 className="text-2xl font-semibold font-serif">
-                      {treatment.name}
-                    </h3>
+                    
+                    <p className="text-sm leading-relaxed mb-4 opacity-80">
+                      {treatment.description}
+                    </p>
                   </div>
 
                   {selectedTreatment !== treatment.id && (
-                    <p className="text-sm opacity-70 mt-2">
-                      Click to explore treatment details
+                    <p className="text-sm opacity-70 mt-auto">
+                      Click to explore package details
                     </p>
                   )}
                 </CardContent>
@@ -141,7 +154,7 @@ export default function AyurvedaTreatments() {
               onClick={() => setSelectedTreatment(null)}
             >
               <motion.div 
-                className="max-w-2xl w-full bg-white rounded-2xl shadow-2xl p-8"
+                className="max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
@@ -149,51 +162,60 @@ export default function AyurvedaTreatments() {
               >
                 {selectedTreatment && (
                   <>
-                    <div className="flex items-center mb-6">
-                      <div 
-                        className="p-4 rounded-full mr-6"
-                        style={{ 
-                          backgroundColor: treatments.find(t => t.id === selectedTreatment)?.color,
-                          color: '#FFFFFF'
-                        }}
-                      >
-                        {React.createElement(treatments.find(t => t.id === selectedTreatment)!.icon, { className: "w-12 h-12" })}
-                      </div>
-                      <h3 className="text-3xl font-bold font-serif text-[#3C1F0F]">
-                        {treatments.find(t => t.id === selectedTreatment)?.name}
-                      </h3>
+                    <div className="h-64 overflow-hidden">
+                      <img 
+                        src={treatments.find(t => t.id === selectedTreatment)?.image}
+                        alt={treatments.find(t => t.id === selectedTreatment)?.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                    
-                    <div className="space-y-4">
-                      <p className="text-[#3C1F0F] leading-relaxed">
-                        {treatments.find(t => t.id === selectedTreatment)?.description}
-                      </p>
-                      
-                      <div className="flex items-center text-[#B24D1F]">
-                        <span className="font-semibold">Duration: </span>
-                        <span className="ml-2">
-                          {treatments.find(t => t.id === selectedTreatment)?.duration}
-                        </span>
+                    <div className="p-8">
+                      <div className="flex items-center mb-6">
+                        <div 
+                          className="p-4 rounded-full mr-6"
+                          style={{ 
+                            backgroundColor: treatments.find(t => t.id === selectedTreatment)?.color,
+                            color: '#FFFFFF'
+                          }}
+                        >
+                          {React.createElement(treatments.find(t => t.id === selectedTreatment)!.icon, { className: "w-12 h-12" })}
+                        </div>
+                        <h3 className="text-3xl font-bold font-serif text-[#3C1F0F]">
+                          {treatments.find(t => t.id === selectedTreatment)?.name}
+                        </h3>
                       </div>
                       
-                      <div>
-                        <h4 className="font-semibold mb-2 text-[#3C1F0F]">Benefits:</h4>
-                        <ul className="space-y-2">
-                          {treatments.find(t => t.id === selectedTreatment)?.benefits.map((benefit, index) => (
-                            <li 
-                              key={index} 
-                              className="flex items-center text-[#3C1F0F]"
-                            >
-                              <div 
-                                className="w-2 h-2 rounded-full mr-3"
-                                style={{ 
-                                  backgroundColor: treatments.find(t => t.id === selectedTreatment)?.color 
-                                }}
-                              />
-                              {benefit}
-                            </li>
-                          ))}
-                        </ul>
+                      <div className="space-y-4">
+                        <p className="text-[#3C1F0F] leading-relaxed">
+                          {treatments.find(t => t.id === selectedTreatment)?.description}
+                        </p>
+                        
+                        <div className="flex items-center text-[#B24D1F]">
+                          <span className="font-semibold">Duration: </span>
+                          <span className="ml-2">
+                            {treatments.find(t => t.id === selectedTreatment)?.duration}
+                          </span>
+                        </div>
+                        
+                        <div>
+                          <h4 className="font-semibold mb-2 text-[#3C1F0F]">Key Benefits:</h4>
+                          <ul className="space-y-2">
+                            {treatments.find(t => t.id === selectedTreatment)?.benefits.map((benefit, index) => (
+                              <li 
+                                key={index} 
+                                className="flex items-center text-[#3C1F0F]"
+                              >
+                                <div 
+                                  className="w-2 h-2 rounded-full mr-3"
+                                  style={{ 
+                                    backgroundColor: treatments.find(t => t.id === selectedTreatment)?.color 
+                                  }}
+                                />
+                                {benefit}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </>

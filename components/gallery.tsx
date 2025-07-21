@@ -1,20 +1,12 @@
 "use client"
 
 import { useState } from "react"
-
-const galleryImages = [
-  { src: "/placeholder.svg?height=400&width=600", caption: "Heritage Villa Exterior" },
-  { src: "/placeholder.svg?height=500&width=400", caption: "Traditional Treatment Room" },
-  { src: "/placeholder.svg?height=400&width=600", caption: "Infinity Pool at Sunset" },
-  { src: "/placeholder.svg?height=600&width=400", caption: "Ayurveda Therapy Session" },
-  { src: "/placeholder.svg?height=400&width=500", caption: "Organic Garden" },
-  { src: "/placeholder.svg?height=500&width=600", caption: "Meditation Pavilion" },
-  { src: "/placeholder.svg?height=400&width=400", caption: "Traditional Kerala Architecture" },
-  { src: "/placeholder.svg?height=600&width=500", caption: "Seaside Dining Area" },
-]
+import Link from "next/link"
+import { galleryImages } from "@/lib/gallery-images"
 
 export default function Gallery() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const displayedImages = galleryImages.slice(0, 6)
 
   return (
     <section className="py-20 px-4" style={{ backgroundColor: "#FFF7F0" }}>
@@ -29,7 +21,7 @@ export default function Gallery() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {galleryImages.map((image, index) => (
+          {displayedImages.map((image, index) => (
             <div
               key={index}
               className={`relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 ${
@@ -63,16 +55,17 @@ export default function Gallery() {
                   <rect width="100" height="100" fill="rgba(154, 62, 15, 0.2)" mask={`url(#mandala-mask-${index})`} />
                 </svg>
               </div>
-
-              <div
-                className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent transition-transform duration-500 ${
-                  hoveredIndex === index ? "translate-y-0" : "translate-y-full"
-                }`}
-              >
-                <p className="font-serif-custom text-white text-lg font-medium">{image.caption}</p>
-              </div>
             </div>
           ))}
+        </div>
+
+        {/* View All Button */}
+        <div className="mt-16 text-center">
+          <Link href="/gallery">
+            <button className="px-8 py-3 bg-[#3C1F0F] text-white rounded-xl hover:bg-[#3C1F0F]/90 transition-colors text-lg font-medium">
+              View Full Gallery
+            </button>
+          </Link>
         </div>
       </div>
     </section>

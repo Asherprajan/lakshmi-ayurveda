@@ -11,6 +11,24 @@ import Gallery from "@/components/gallery"
 import OnamEvents from "@/components/onam-events"
 import Contact from "@/components/contact"
 import StickyEnquiry from "@/components/sticky-enquiry"
+import DoctorsSection from "@/components/ui/DoctorsSection"
+
+interface Treatment {
+  name: string
+  icon: JSX.Element
+  description: string
+}
+
+interface Facility {
+  name: string
+  icon: JSX.Element
+}
+
+interface Attraction {
+  name: string
+  distance: string
+  image: string
+}
 
 export default function AyurvedaRetreat() {
   const [activeCard, setActiveCard] = useState<number | null>(null)
@@ -25,7 +43,7 @@ export default function AyurvedaRetreat() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const treatments = [
+  const treatments: Treatment[] = [
     {
       name: "Chavitti Tirumal",
       icon: <Leaf className="w-8 h-8" />,
@@ -52,7 +70,7 @@ export default function AyurvedaRetreat() {
     },
   ]
 
-  const facilities = [
+  const facilities: Facility[] = [
     { name: "Private Pool", icon: <Waves className="w-6 h-6" /> },
     { name: "Ayurveda Hall", icon: <Flower2 className="w-6 h-6" /> },
     { name: "Concierge", icon: <Phone className="w-6 h-6" /> },
@@ -61,7 +79,7 @@ export default function AyurvedaRetreat() {
     { name: "Garden Therapy", icon: <Leaf className="w-6 h-6" /> },
   ]
 
-  const attractions = [
+  const attractions: Attraction[] = [
     { name: "Kovalam Beach", distance: "15 min", image: "/placeholder.svg?height=200&width=300" },
     { name: "Padmanabhaswamy Temple", distance: "25 min", image: "/placeholder.svg?height=200&width=300" },
     { name: "Trivandrum Airport", distance: "20 min", image: "/placeholder.svg?height=200&width=300" },
@@ -96,13 +114,16 @@ export default function AyurvedaRetreat() {
 
       {/* Gallery */}
       <Gallery
-        galleryImages={galleryImages}
+        galleryImages={galleryImages}   
         currentGalleryIndex={currentGalleryIndex}
         setCurrentGalleryIndex={setCurrentGalleryIndex}
       />
 
       {/* Celebrate Onam */}
       <OnamEvents />
+
+      {/* Our Doctors */}
+      <DoctorsSection />
 
       {/* Contact Form */}
       <Contact />
@@ -125,17 +146,17 @@ export default function AyurvedaRetreat() {
               <div className="space-y-2 opacity-80">
                 <div className="flex items-center space-x-2">
                   <Phone className="w-4 h-4" />
-                  <span>+91 98765 43210</span>
+                  <span>+91 9747205046</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Mail className="w-4 h-4" />
-                  <span>info@ayurvedavilla.com</span>
+                  <span>Lakshmiayurvedakerala@gmail.com</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <MapPin className="w-4 h-4" />
-                  <span>Kovalam, Kerala, India</span>
+                  <span>Oluppuvila Veedu, Kannankodu, Vellar, Kovalam, Trivandrum, Kerala 695527</span>
                 </div>
-              </div>
+              </div>  
             </div>
             <div>
               <h4 className="font-semibold mb-4">Experience</h4>

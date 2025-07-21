@@ -17,11 +17,11 @@ export default function StickyEnquiry() {
   }, [])
 
   const handleWhatsApp = () => {
-    window.open("https://wa.me/919876543210", "_blank")
+    window.open("https://wa.me/919747205046", "_blank")
   }
 
   const handleCall = () => {
-    window.open("tel:+919876543210", "_self")
+    window.open("tel:+919747205046", "_self")
   }
 
   return (

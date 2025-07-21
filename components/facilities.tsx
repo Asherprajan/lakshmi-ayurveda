@@ -5,8 +5,8 @@ import { Waves, Building, Users, Car, Wifi, Utensils } from "lucide-react"
 const facilities = [
   {
     icon: <Waves className="w-12 h-12" />,
-    title: "Private Pool",
-    description: "Infinity pool overlooking the Arabian Sea with temperature control and underwater lighting.",
+    title: "Yoga Shala",
+    description: "Serene yoga pavilion with traditional wooden flooring, natural ventilation and panoramic views of nature.",
   },
   {
     icon: <Building className="w-12 h-12" />,

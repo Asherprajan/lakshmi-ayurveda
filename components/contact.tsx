@@ -59,10 +59,7 @@ export default function Contact() {
                     Phone
                   </h4>
                   <p className="font-sans-custom" style={{ color: "#3C1F0F", opacity: 0.8 }}>
-                    +91 98765 43210
-                  </p>
-                  <p className="font-sans-custom" style={{ color: "#3C1F0F", opacity: 0.8 }}>
-                    +91 87654 32109
+                    +91 9747205046
                   </p>
                 </div>
               </div>
@@ -76,10 +73,7 @@ export default function Contact() {
                     Email
                   </h4>
                   <p className="font-sans-custom" style={{ color: "#3C1F0F", opacity: 0.8 }}>
-                    info@ayurvedavilla.com
-                  </p>
-                  <p className="font-sans-custom" style={{ color: "#3C1F0F", opacity: 0.8 }}>
-                    reservations@ayurvedavilla.com
+                    Lakshmiayurvedakerala@gmail.com
                   </p>
                 </div>
               </div>
@@ -93,7 +87,9 @@ export default function Contact() {
                     Address
                   </h4>
                   <p className="font-sans-custom" style={{ color: "#3C1F0F", opacity: 0.8 }}>
-                    Heritage Villa Road
+                    Oluppuvila Veedu
+                    <br />
+                    Kannankodu, Vellar
                     <br />
                     Kovalam, Trivandrum
                     <br />
