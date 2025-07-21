@@ -32,7 +32,7 @@ export default function AboutVilla() {
             className={`relative overflow-hidden rounded-3xl transition-all duration-1000 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}`}
           >
             <img
-              src="/logo.png"
+              src="/hello.png"
               alt="Heritage Villa"
               className="w-full h-[600px] object-cover"
             />

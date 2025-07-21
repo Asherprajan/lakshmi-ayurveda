@@ -147,14 +147,14 @@ export default function AyurvedaTreatments() {
           {selectedTreatment && (
             <motion.div 
               layoutId={`treatment-card-${selectedTreatment}`}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 overflow-y-auto"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedTreatment(null)}
             >
               <motion.div 
-                className="max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden"
+                className="max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden my-8 relative"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
@@ -162,25 +162,25 @@ export default function AyurvedaTreatments() {
               >
                 {selectedTreatment && (
                   <>
-                    <div className="h-64 overflow-hidden">
+                    <button 
+                      onClick={() => setSelectedTreatment(null)}
+                      className="absolute top-4 right-4 z-10 bg-gray-100 rounded-full p-2 hover:bg-gray-200 transition-colors"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                    <div className="h-64 md:h-80 overflow-hidden">
                       <img 
                         src={treatments.find(t => t.id === selectedTreatment)?.image}
                         alt={treatments.find(t => t.id === selectedTreatment)?.name}
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-8">
-                      <div className="flex items-center mb-6">
-                        <div 
-                          className="p-4 rounded-full mr-6"
-                          style={{ 
-                            backgroundColor: treatments.find(t => t.id === selectedTreatment)?.color,
-                            color: '#FFFFFF'
-                          }}
-                        >
-                          {React.createElement(treatments.find(t => t.id === selectedTreatment)!.icon, { className: "w-12 h-12" })}
-                        </div>
-                        <h3 className="text-3xl font-bold font-serif text-[#3C1F0F]">
+                    <div className="p-6 md:p-8">
+                      <div className="flex flex-col md:flex-row items-center mb-6">
+                      
+                        <h3 className="text-2xl md:text-3xl font-bold font-serif text-[#3C1F0F] text-center md:text-left">
                           {treatments.find(t => t.id === selectedTreatment)?.name}
                         </h3>
                       </div>
