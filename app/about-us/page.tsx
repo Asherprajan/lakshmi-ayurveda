@@ -210,7 +210,7 @@ export default function AboutPage() {
           >
             Welcome to
             <span className="block text-5xl md:text-7xl bg-gradient-to-r from-[#3C1F0F] via-[#8B4513] to-[#D2691E] bg-clip-text text-transparent">
-              Lekshmi Ayurveda
+              Lakshmi Ayurveda
             </span>
           </motion.h1>
           <motion.p
@@ -289,7 +289,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                Lekshmi Ayurveda, Yoga & Medical Tourism is a center of excellence dedicated to restoring natural
+                Lakshmi Ayurveda, Yoga & Medical Tourism is a center of excellence dedicated to restoring natural
                 health and balance. We bring together the therapeutic power of classical Ayurveda and traditional
                 Yoga, offering holistic treatments that promote lasting wellness.
               </motion.p>
@@ -418,7 +418,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl font-bold text-[#3C1F0F] mb-4">
-              Why Choose Lekshmi?
+              Why Choose Lakshmi?
             </h2>
             <p className="text-[#3C1F0F] max-w-2xl mx-auto">
               Experience the difference that authentic traditions and expert care make
@@ -493,7 +493,7 @@ export default function AboutPage() {
                   viewport={{ once: true }}
                 >
                   <p className="text-[#3C1F0F] leading-relaxed">
-                    At Lekshmi, we invite you to embark on a transformative wellness journey. Whether you're seeking
+                    At Lakshmi, we invite you to embark on a transformative wellness journey. Whether you're seeking
                     relief from chronic conditions, stress, fatigue, or simply want to improve your overall health,
                     let our holistic approach guide you toward a balanced, energized, and healthier life—naturally.
                   </p>
