@@ -7,8 +7,8 @@ import { galleryImages } from "@/lib/gallery-images"
 import ContactModal from "./contact-modal"                
 export default function Gallery() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = useRef<HTMLElement>(null)
+  const isInView = useInView(ref as React.RefObject<Element>, { once: true, margin: "-100px" })
   const displayedImages = galleryImages.slice(0, 6)
   const [contactModalOpen, setContactModalOpen] = useState(false)
   const handleContactSubmit = async (data: { name: string; phone: string; message: string }) => {

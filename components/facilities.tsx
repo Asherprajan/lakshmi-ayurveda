@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
 import { Waves, Building, Users, Car, Wifi, Utensils, Activity } from "lucide-react"
 import ContactModal from "./contact-modal"
+import React from "react"
 
 const facilities = [
   {
@@ -52,8 +53,8 @@ const facilities = [
 
 export default function Facilities() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = React.useRef<HTMLElement>(null)
+  const isInView = useInView(ref as React.RefObject<Element>, { once: true, margin: "-100px" })
   const [contactModalOpen, setContactModalOpen] = useState(false)
   const handleContactSubmit = async (data: { name: string; phone: string; message: string }) => {
     console.log("Contact form submitted:", data)

@@ -3,8 +3,9 @@
 import React from "react"
 import { motion, useInView } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
-import { treatments } from "@/lib/treatments-data"
+import { packages } from "@/lib/packages"
 import ContactModal from "./contact-modal"
+import { useRouter } from "next/navigation"
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState(false)
@@ -18,15 +19,30 @@ function useIsMobile() {
 }
 
 export default function AyurvedaTreatments() {
-  const ref = React.useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = React.useRef<HTMLElement>(null)
+  const isInView = useInView(ref as React.RefObject<Element>, { once: true, margin: "-100px" })
   const isMobile = useIsMobile()
+  const router = useRouter()
 
   // Contact modal state and handler
   const [contactModalOpen, setContactModalOpen] = React.useState(false)
   const handleContactSubmit = async (data: { name: string; phone: string; message: string }) => {
     // You can add your submission logic here (e.g., API call)
     console.log("Consultation form submitted:", data)
+  }
+
+  // Helper: fallback image if pkg.image is not present
+  const getPackageImage = (pkg: any, idx: number) => {
+    if (pkg.image) return pkg.image
+    const fallbackImages = [
+      "/rejuvination.jpeg",
+      "/stress.jpeg",
+      "/weight.jpeg",
+      "/joint.jpeg",
+      "/panchakarma.jpeg",
+      "/women.jpeg",
+    ]
+    return fallbackImages[idx % fallbackImages.length]
   }
 
   return (
@@ -36,7 +52,7 @@ export default function AyurvedaTreatments() {
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-[#3C1F0F]/10 to-[#F1AD60]/5 rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2" />
       <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-[#B24D1F]/5 to-[#3C1F0F]/5 rounded-full blur-2xl transform -translate-x-1/2 -translate-y-1/2" />
       
-      <div className="max-w-7xl mx-auto relative">
+      <div className="max-w-7xl mx-auto relative">    
         {/* Enhanced Section Header */}
         <motion.div 
           initial={{ opacity: 0, y: -50 }}
@@ -61,11 +77,11 @@ export default function AyurvedaTreatments() {
           </p>
         </motion.div>
 
-        {/* Enhanced Treatments Grid */}
+        {/* Enhanced Packages Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {treatments.map((treatment, idx) => (
+          {packages.map((pkg, idx) => (
             <motion.div
-              key={treatment.id}
+              key={pkg.id}
               initial={{ opacity: 0, y: 60, scale: 0.9 }}
               animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 60, scale: 0.9 }}
               transition={{ 
@@ -79,14 +95,23 @@ export default function AyurvedaTreatments() {
                 y: -12,
                 transition: { duration: 0.4, type: "spring", stiffness: 300 }
               }}
-              className="group"
+              className="group cursor-pointer"
+              onClick={() => router.push(`/lakshmi-ayurveda-packages/${pkg.id}`)}
+              tabIndex={0}
+              onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    router.push(`/lakshmi-ayurveda-packages/${pkg.id}`)
+                }
+              }}
+              role="button"
+              aria-label={`View details for ${pkg.name}`}
             >
               <Card className="h-full bg-white/90 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden rounded-3xl">
                 {/* Enhanced Image Container */}
                 <div className="relative h-72 overflow-hidden">
                   <motion.img 
-                    src={treatment.image} 
-                    alt={treatment.name}
+                    src={getPackageImage(pkg, idx)} 
+                    alt={pkg.name}
                     className="w-full h-full object-cover"
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
@@ -100,7 +125,7 @@ export default function AyurvedaTreatments() {
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.2 }}
                   >
-                    {treatment.duration}
+                    {pkg.duration}
                   </motion.div>
 
                   {/* Premium Badge */}
@@ -114,7 +139,7 @@ export default function AyurvedaTreatments() {
                   <div className="mb-6">
                     <div className="flex-1">
                       <h3 className="text-2xl font-bold text-[#3C1F0F] mb-3 group-hover:text-[#B24D1F] transition-colors duration-300">
-                        {treatment.name}
+                        {pkg.name}
                       </h3>
                       <div className="flex items-center gap-1 mb-4">
                         <span className="text-sm text-[#3C1F0F]/60 font-medium">★★★★★ 5.0</span>
@@ -124,7 +149,7 @@ export default function AyurvedaTreatments() {
 
                   {/* Enhanced Description */}
                   <p className="text-[#3C1F0F]/70 leading-relaxed mb-6 line-clamp-3 text-base">
-                    {treatment.description}
+                    {pkg.subtitle}
                   </p>
 
                   {/* Enhanced Benefits Preview */}
@@ -133,7 +158,7 @@ export default function AyurvedaTreatments() {
                       Key Benefits:
                     </h4>
                     <div className="flex flex-wrap gap-2">
-                      {treatment.benefits.slice(0, 2).map((benefit, index) => (
+                      {pkg.benefits.slice(0, 2).map((benefit, index) => (
                         <span 
                           key={index}
                           className="px-3 py-1.5 bg-gradient-to-r from-[#3C1F0F]/5 to-[#B24D1F]/5 text-[#3C1F0F]/80 text-xs rounded-full font-medium border border-[#3C1F0F]/10"
@@ -141,9 +166,9 @@ export default function AyurvedaTreatments() {
                           {benefit}
                         </span>
                       ))}
-                      {treatment.benefits.length > 2 && (
+                      {pkg.benefits.length > 2 && (
                         <span className="px-3 py-1.5 bg-gradient-to-r from-[#3C1F0F]/10 to-[#B24D1F]/10 text-[#3C1F0F]/60 text-xs rounded-full font-medium border border-[#3C1F0F]/20">
-                          +{treatment.benefits.length - 2} more
+                          +{pkg.benefits.length - 2} more
                         </span>
                       )}
                     </div>

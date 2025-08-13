@@ -136,7 +136,7 @@ export default function OnamEvents() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.92, opacity: 0 }}
               transition={{ type: "spring", stiffness: 260, damping: 22 }}
-              onClick={e => e.stopPropagation()}
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
               <button
                 className="absolute top-4 right-4 z-10 bg-[#1a0e07]/80 backdrop-blur-md rounded-full p-2 hover:bg-[#3C1F0F]/90 transition-all duration-300 shadow-lg hover:shadow-xl border border-[#F1AD60]/30"

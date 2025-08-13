@@ -45,6 +45,20 @@ function splitTextToWords(text: string) {
   return words.map((word, i) => (i < words.length - 1 ? word + " " : word));
 }
 
+// Optimized theme gradient: a smooth, balanced blend between gold and deep brown
+const THEME_GRADIENT =
+  "linear-gradient(90deg, #F1AD60 0%, #F1AD60 35%, #F1AD60 60%, #9A3E0F 100%)";
+
+const GRADIENT_TEXT_STYLE = {
+  display: "inline-block",
+  whiteSpace: "pre",
+  background: THEME_GRADIENT,
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  backgroundClip: "text",
+  color: "transparent",
+};
+
 export default function Hero() {
   const handleScrollDown = () => {
     // Scroll to next section smoothly
@@ -62,24 +76,13 @@ export default function Hero() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const h1Text = "Embrace the Wisdom of Ayurveda";
-  const h3Text = "Rejuvenate your mind, body, and spirit in nature’s embrace";
+  const h1Text = "Welcome to Lakshmi Ayurveda.";
+  const h3Text = "Yoga and Medical Tourism.";
 
   return (
     <section className="relative h-screen flex flex-col items-center justify-center text-white">
       {/* Logo in top left */}
-      <div className="absolute top-6 left-1 sm:left-6 z-30">
-        <Link href="/" aria-label="Lakshmi Ayurveda Home" className="flex items-center space-x-2 group">
-          <Image
-            src="/nav.png"
-            alt="Lakshmi Ayurveda Logo" 
-            width={48}
-            height={48}
-            className="h-12 w-auto transition-transform group-hover:scale-105 drop-shadow-lg sm:h-16 sm:w-auto"
-            priority
-          />
-        </Link>
-      </div>
+     
       <motion.div
         className="absolute top-0 left-0 w-full h-full overflow-hidden"
         initial="initial"
@@ -128,7 +131,7 @@ export default function Hero() {
             <motion.span
               key={i}
               variants={letterVariants as Variants}
-              style={{ display: "inline-block", whiteSpace: "pre" }}
+              style={GRADIENT_TEXT_STYLE}
             >
               {char}
             </motion.span>
@@ -142,7 +145,7 @@ export default function Hero() {
             <motion.span
               key={i}
               variants={wordVariants as Variants}
-              style={{ display: "inline-block", whiteSpace: "pre" }}
+              style={GRADIENT_TEXT_STYLE}
             >
               {word}
             </motion.span>

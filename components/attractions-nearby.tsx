@@ -73,7 +73,7 @@ function AttractionModal({ attraction, onClose }: { attraction: typeof ATTRACTIO
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.92, opacity: 0 }}
         transition={{ type: "spring", stiffness: 260, damping: 22 }}
-        onClick={e => e.stopPropagation()}
+        onClick={(e: React.MouseEvent) => e.stopPropagation()}
       >
         <button
           className="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition"

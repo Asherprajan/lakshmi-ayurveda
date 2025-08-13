@@ -4,26 +4,35 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 
-// Navigation links with proper routes
+// Theme colors
+const PRIMARY_BG = "bg-[#1a0e07]"
+const PRIMARY_BG_SCROLLED = "bg-[#1a0e07]/90"
+const PRIMARY_BORDER = "border-[#F1AD60]/40"
+const PRIMARY_ACCENT = "text-[#F1AD60]"
+const PRIMARY_ACCENT_BG = "bg-[#F1AD60]"
+const PRIMARY_ACCENT_HOVER = "hover:text-[#F1AD60]"
+const NAV_FONT = "font-['Manrope']"
+const NAV_FONT_BOLD = "font-['Playfair_Display'] font-bold"
+
+// Navigation links (no "current" property, highlight by route if needed)
 const navLinks = [
-  { href: "/", label: "Home", current: true },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/treatments", label: "Treatments" },
-  { href: "/doctors", label: "Doctors" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/about-us", label: "About" },
+  { href: "/lakshmi-ayurveda-services", label: "Services" },
+  { href: "/lakshmi-ayurveda-packages", label: "Packages" },
+  { href: "/contact-us", label: "Contact" },
 ]
 
-// Icon components for better maintainability
+// Icon components
 const MenuIcon = () => (
-  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+  <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4 8h16M4 16h16" />
   </svg>
 )
 
 const CloseIcon = () => (
-  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+  <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
   </svg>
 )
 
@@ -31,75 +40,73 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
-  // Handle scroll effect for header styling
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 10)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile menu when clicking outside
+  // Close mobile menu on outside click
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Element
-      if (isMenuOpen && !target.closest('nav')) {
-        setIsMenuOpen(false)
-      }
+    if (!isMenuOpen) return
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as Element
+      if (!target.closest('nav')) setIsMenuOpen(false)
     }
-
-    if (isMenuOpen) {
-      document.addEventListener('click', handleClickOutside)
-      return () => document.removeEventListener('click', handleClickOutside)
-    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
   }, [isMenuOpen])
 
-  // Handle escape key to close mobile menu
+  // Escape closes menu
   useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isMenuOpen) {
-        setIsMenuOpen(false)
-      }
+    if (!isMenuOpen) return
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMenuOpen(false)
     }
-
-    document.addEventListener('keydown', handleEscape)
-    return () => document.removeEventListener('keydown', handleEscape)
+    document.addEventListener('keydown', handleEsc)
+    return () => document.removeEventListener('keydown', handleEsc)
   }, [isMenuOpen])
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+  const toggleMenu = () => setIsMenuOpen((v) => !v)
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-[#9A3E0F]/95 backdrop-blur-sm shadow-md' : 'bg-[#9A3E0F]'
-    } border-b border-gray-200`}>
-      <nav className="px-4 lg:px-6 py-3" aria-label="Main navigation">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${NAV_FONT} ${isScrolled ? PRIMARY_BG_SCROLLED + " shadow-lg backdrop-blur-md" : PRIMARY_BG} ${PRIMARY_BORDER} border-b`}
+    >
+      <nav className="px-4 lg:px-8 py-2.5 max-w-7xl mx-auto" aria-label="Main navigation">
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group" aria-label="Lakshmi Ayurveda Home">
-            <div className="relative">
-              <Image 
-                src="/nav.png" 
-                alt="Lakshmi Ayurveda Logo" 
-                width={36} 
-                height={36} 
-                className="h-9 w-auto transition-transform group-hover:scale-105"
-                priority
-              />
-            </div>
-        
+          <Link href="/" className="flex items-center gap-3 group" aria-label="Lakshmi Ayurveda Home">
+            <Image
+              src="/nav.png"
+              alt="Lakshmi Ayurveda Logo"
+              width={48}
+              height={48}
+              className="h-12 w-auto transition-transform group-hover:scale-105 drop-shadow-lg"
+              priority
+            />
+           
           </Link>
 
-          {/* Desktop Actions */}
-          <div className="hidden lg:flex items-center space-x-4">
-            
-          </div>
+          {/* Desktop Nav */}
+          <ul className="hidden lg:flex items-center gap-8 ml-8">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`text-base px-1.5 py-0.5 transition-colors duration-200 border-b-2 border-transparent ${PRIMARY_ACCENT} ${PRIMARY_ACCENT_HOVER} hover:border-[#F1AD60]`}
+                  style={{ color: "#F1AD60" }} // Ensure text is visible
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="lg:hidden inline-flex items-center justify-center p-2 text-gray-100 hover:text-[--primary] hover:bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-[--primary] focus:ring-offset-2 rounded-lg transition-all duration-200"
+            className="lg:hidden inline-flex items-center justify-center p-2 text-[#F1AD60] hover:bg-[#F1AD60]/10 focus:outline-none focus:ring-2 focus:ring-[#F1AD60] rounded-lg transition-all duration-200"
             aria-controls="mobile-menu"
             aria-expanded={isMenuOpen}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -110,26 +117,18 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
-        <div 
-          className={`lg:hidden transition-all duration-300 ease-in-out ${
-            isMenuOpen 
-              ? 'max-h-96 opacity-100 visible' 
-              : 'max-h-0 opacity-0 invisible'
-          } overflow-hidden`} 
+        <div
+          className={`lg:hidden transition-all duration-300 ease-in-out ${isMenuOpen ? "max-h-96 opacity-100 visible" : "max-h-0 opacity-0 invisible"} overflow-hidden`}
           id="mobile-menu"
         >
-          <div className="pt-4 pb-3 border-t border-[#9A3E0F]/20">
+          <div className="pt-4 pb-4 border-t border-[#F1AD60]/20">
             <ul className="space-y-1">
               {navLinks.map((link) => (
-                <li key={link.label}>
+                <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                      link.current
-                        ? 'bg-white text-[#9A3E0F]'
-                        : 'text-white hover:text-[#F1AD60] hover:bg-[#9A3E0F]/80'
-                    }`}
-                    aria-current={link.current ? 'page' : undefined}
+                    className="block px-4 py-2 rounded-md text-base font-medium text-[#F1AD60] bg-[#1a0e07]/80 hover:bg-[#F1AD60]/10 transition-colors duration-200"
+                    style={{ color: "#F1AD60" }} // Ensure text is visible
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
@@ -137,31 +136,7 @@ export default function Header() {
                 </li>
               ))}
             </ul>
-            
-            {/* Mobile Actions */}
-         
           </div>
-        </div>
-
-        {/* Desktop Navigation */}
-        <div className="hidden lg:block">
-          <ul className="flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <li key={link.label}>
-                <Link
-                  href={link.href}
-                  className={`text-sm font-medium transition-colors duration-200 ${
-                    link.current
-                      ? 'text-[#F1AD60] border-b-2 border-[#F1AD60]'
-                      : 'text-white hover:text-[#F1AD60] hover:border-b-2 hover:border-[#F1AD60]'
-                  }`}
-                  aria-current={link.current ? 'page' : undefined}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
       </nav>
     </header>

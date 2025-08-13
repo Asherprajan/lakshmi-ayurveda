@@ -1,0 +1,193 @@
+import { HTMLMotionProps, MotionProps } from 'framer-motion';
+
+// Extend motion components to include HTML element props
+declare module 'framer-motion' {
+  export interface HTMLMotionProps<T extends keyof JSX.IntrinsicElements> extends MotionProps {
+    className?: string;
+    style?: React.CSSProperties;
+    children?: React.ReactNode;
+    onClick?: (event: React.MouseEvent) => void;
+    onKeyDown?: (event: React.KeyboardEvent) => void;
+    onHoverStart?: () => void;
+    onHoverEnd?: () => void;
+    href?: string;
+    target?: string;
+    rel?: string;
+    tabIndex?: number;
+    'aria-label'?: string;
+    role?: string;
+    src?: string;
+    alt?: string;
+    fill?: boolean;
+    priority?: boolean;
+    ref?: React.Ref<T>;
+    // Add all other common HTML attributes
+    id?: string;
+    title?: string;
+    lang?: string;
+    dir?: string;
+    hidden?: boolean;
+    draggable?: boolean;
+    spellCheck?: boolean;
+    autoComplete?: string;
+    autoFocus?: boolean;
+    disabled?: boolean;
+    form?: string;
+    formAction?: string;
+    formEncType?: string;
+    formMethod?: string;
+    formNoValidate?: boolean;
+    formTarget?: string;
+    name?: string;
+    placeholder?: string;
+    readOnly?: boolean;
+    required?: boolean;
+    size?: number;
+    type?: string;
+    value?: string | number | readonly string[];
+    accept?: string;
+    acceptCharset?: string;
+    action?: string;
+    encType?: string;
+    method?: string;
+    noValidate?: boolean;
+    // Image specific
+    width?: number | string;
+    height?: number | string;
+    loading?: 'lazy' | 'eager';
+    decoding?: 'async' | 'sync' | 'auto';
+    // Video specific
+    controls?: boolean;
+    autoPlay?: boolean;
+    loop?: boolean;
+    muted?: boolean;
+    poster?: string;
+    preload?: string;
+    // Audio specific
+    preload?: string;
+    // Form specific
+    max?: string | number;
+    min?: string | number;
+    step?: string | number;
+    pattern?: string;
+    multiple?: boolean;
+    selected?: boolean;
+    checked?: boolean;
+    defaultChecked?: boolean;
+    defaultValue?: string | number | readonly string[];
+    // Link specific
+    download?: string;
+    hreflang?: string;
+    media?: string;
+    ping?: string;
+    referrerPolicy?: string;
+    // Button specific
+    formAction?: string;
+    formEncType?: string;
+    formMethod?: string;
+    formNoValidate?: boolean;
+    formTarget?: string;
+    // Input specific
+    accept?: string;
+    autoCapitalize?: string;
+    autoCorrect?: string;
+    capture?: string;
+    crossOrigin?: string;
+    enterKeyHint?: string;
+    inputMode?: string;
+    list?: string;
+    maxLength?: number;
+    minLength?: number;
+    multiple?: boolean;
+    pattern?: string;
+    popoverTarget?: string;
+    popoverTargetAction?: string;
+    popoverTrigger?: string;
+    results?: number;
+    role?: string;
+    // Global attributes
+    accessKey?: string;
+    contentEditable?: boolean | 'true' | 'false';
+    contextMenu?: string;
+    data?: { [key: string]: string };
+    dir?: 'ltr' | 'rtl' | 'auto';
+    draggable?: boolean;
+    hidden?: boolean;
+    id?: string;
+    lang?: string;
+    spellCheck?: boolean;
+    style?: React.CSSProperties;
+    tabIndex?: number;
+    title?: string;
+    translate?: 'yes' | 'no';
+  }
+
+  // Extend specific motion components
+  export const motion: {
+    div: React.ForwardRefExoticComponent<HTMLMotionProps<'div'> & React.RefAttributes<HTMLDivElement>>;
+    span: React.ForwardRefExoticComponent<HTMLMotionProps<'span'> & React.RefAttributes<HTMLSpanElement>>;
+    h1: React.ForwardRefExoticComponent<HTMLMotionProps<'h1'> & React.RefAttributes<HTMLHeadingElement>>;
+    h2: React.ForwardRefExoticComponent<HTMLMotionProps<'h2'> & React.RefAttributes<HTMLHeadingElement>>;
+    h3: React.ForwardRefExoticComponent<HTMLMotionProps<'h3'> & React.RefAttributes<HTMLHeadingElement>>;
+    p: React.ForwardRefExoticComponent<HTMLMotionProps<'p'> & React.RefAttributes<HTMLParagraphElement>>;
+    section: React.ForwardRefExoticComponent<HTMLMotionProps<'section'> & React.RefAttributes<HTMLElement>>;
+    button: React.ForwardRefExoticComponent<HTMLMotionProps<'button'> & React.RefAttributes<HTMLButtonElement>>;
+    a: React.ForwardRefExoticComponent<HTMLMotionProps<'a'> & React.RefAttributes<HTMLAnchorElement>>;
+    img: React.ForwardRefExoticComponent<HTMLMotionProps<'img'> & React.RefAttributes<HTMLImageElement>>;
+    ul: React.ForwardRefExoticComponent<HTMLMotionProps<'ul'> & React.RefAttributes<HTMLUListElement>>;
+    li: React.ForwardRefExoticComponent<HTMLMotionProps<'li'> & React.RefAttributes<HTMLLIElement>>;
+    nav: React.ForwardRefExoticComponent<HTMLMotionProps<'nav'> & React.RefAttributes<HTMLElement>>;
+    header: React.ForwardRefExoticComponent<HTMLMotionProps<'header'> & React.RefAttributes<HTMLElement>>;
+    footer: React.ForwardRefExoticComponent<HTMLMotionProps<'footer'> & React.RefAttributes<HTMLElement>>;
+    main: React.ForwardRefExoticComponent<HTMLMotionProps<'main'> & React.RefAttributes<HTMLElement>>;
+    article: React.ForwardRefExoticComponent<HTMLMotionProps<'article'> & React.RefAttributes<HTMLElement>>;
+    aside: React.ForwardRefExoticComponent<HTMLMotionProps<'aside'> & React.RefAttributes<HTMLElement>>;
+    form: React.ForwardRefExoticComponent<HTMLMotionProps<'form'> & React.RefAttributes<HTMLFormElement>>;
+    input: React.ForwardRefExoticComponent<HTMLMotionProps<'input'> & React.RefAttributes<HTMLInputElement>>;
+    textarea: React.ForwardRefExoticComponent<HTMLMotionProps<'textarea'> & React.RefAttributes<HTMLTextAreaElement>>;
+    label: React.ForwardRefExoticComponent<HTMLMotionProps<'label'> & React.RefAttributes<HTMLLabelElement>>;
+    select: React.ForwardRefExoticComponent<HTMLMotionProps<'select'> & React.RefAttributes<HTMLSelectElement>>;
+    option: React.ForwardRefExoticComponent<HTMLMotionProps<'option'> & React.RefAttributes<HTMLOptionElement>>;
+    fieldset: React.ForwardRefExoticComponent<HTMLMotionProps<'fieldset'> & React.RefAttributes<HTMLFieldSetElement>>;
+    legend: React.ForwardRefExoticComponent<HTMLMotionProps<'legend'> & React.RefAttributes<HTMLLegendElement>>;
+    table: React.ForwardRefExoticComponent<HTMLMotionProps<'table'> & React.RefAttributes<HTMLTableElement>>;
+    thead: React.ForwardRefExoticComponent<HTMLMotionProps<'thead'> & React.RefAttributes<HTMLTableSectionElement>>;
+    tbody: React.ForwardRefExoticComponent<HTMLMotionProps<'tbody'> & React.RefAttributes<HTMLTableSectionElement>>;
+    tr: React.ForwardRefExoticComponent<HTMLMotionProps<'tr'> & React.RefAttributes<HTMLTableRowElement>>;
+    th: React.ForwardRefExoticComponent<HTMLMotionProps<'th'> & React.RefAttributes<HTMLTableCellElement>>;
+    td: React.ForwardRefExoticComponent<HTMLMotionProps<'td'> & React.RefAttributes<HTMLTableCellElement>>;
+    caption: React.ForwardRefExoticComponent<HTMLMotionProps<'caption'> & React.RefAttributes<HTMLTableCaptionElement>>;
+    colgroup: React.ForwardRefExoticComponent<HTMLMotionProps<'colgroup'> & React.RefAttributes<HTMLTableColElement>>;
+    col: React.ForwardRefExoticComponent<HTMLMotionProps<'col'> & React.RefAttributes<HTMLTableColElement>>;
+    tfoot: React.ForwardRefExoticComponent<HTMLMotionProps<'tfoot'> & React.RefAttributes<HTMLTableSectionElement>>;
+    video: React.ForwardRefExoticComponent<HTMLMotionProps<'video'> & React.RefAttributes<HTMLVideoElement>>;
+    audio: React.ForwardRefExoticComponent<HTMLMotionProps<'audio'> & React.RefAttributes<HTMLAudioElement>>;
+    source: React.ForwardRefExoticComponent<HTMLMotionProps<'source'> & React.RefAttributes<HTMLSourceElement>>;
+    track: React.ForwardRefExoticComponent<HTMLMotionProps<'track'> & React.RefAttributes<HTMLTrackElement>>;
+    embed: React.ForwardRefExoticComponent<HTMLMotionProps<'embed'> & React.RefAttributes<HTMLEmbedElement>>;
+    object: React.ForwardRefExoticComponent<HTMLMotionProps<'object'> & React.RefAttributes<HTMLObjectElement>>;
+    param: React.ForwardRefExoticComponent<HTMLMotionProps<'param'> & React.RefAttributes<HTMLParamElement>>;
+    map: React.ForwardRefExoticComponent<HTMLMotionProps<'map'> & React.RefAttributes<HTMLMapElement>>;
+    area: React.ForwardRefExoticComponent<HTMLMotionProps<'area'> & React.RefAttributes<HTMLAreaElement>>;
+    canvas: React.ForwardRefExoticComponent<HTMLMotionProps<'canvas'> & React.RefAttributes<HTMLCanvasElement>>;
+    script: React.ForwardRefExoticComponent<HTMLMotionProps<'script'> & React.RefAttributes<HTMLScriptElement>>;
+    noscript: React.ForwardRefExoticComponent<HTMLMotionProps<'noscript'> & React.RefAttributes<HTMLElement>>;
+    applet: React.ForwardRefExoticComponent<HTMLMotionProps<'applet'> & React.RefAttributes<HTMLAppletElement>>;
+    basefont: React.ForwardRefExoticComponent<HTMLMotionProps<'basefont'> & React.RefAttributes<HTMLElement>>;
+    bgsound: React.ForwardRefExoticComponent<HTMLMotionProps<'bgsound'> & React.RefAttributes<HTMLElement>>;
+    blink: React.ForwardRefExoticComponent<HTMLMotionProps<'blink'> & React.RefAttributes<HTMLElement>>;
+    dir: React.ForwardRefExoticComponent<HTMLMotionProps<'dir'> & React.RefAttributes<HTMLDirectoryElement>>;
+    font: React.ForwardRefExoticComponent<HTMLMotionProps<'font'> & React.RefAttributes<HTMLFontElement>>;
+    frame: React.ForwardRefExoticComponent<HTMLMotionProps<'frame'> & React.RefAttributes<HTMLFrameElement>>;
+    frameset: React.ForwardRefExoticComponent<HTMLMotionProps<'frameset'> & React.RefAttributes<HTMLFrameSetElement>>;
+    hgroup: React.ForwardRefExoticComponent<HTMLMotionProps<'hgroup'> & React.RefAttributes<HTMLElement>>;
+    isindex: React.ForwardRefExoticComponent<HTMLMotionProps<'isindex'> & React.RefAttributes<HTMLElement>>;
+    listing: React.ForwardRefExoticComponent<HTMLMotionProps<'listing'> & React.RefAttributes<HTMLPreElement>>;
+    marquee: React.ForwardRefExoticComponent<HTMLMotionProps<'marquee'> & React.RefAttributes<HTMLMarqueeElement>>;
+    multicol: React.ForwardRefExoticComponent<HTMLMotionProps<'multicol'> & React.RefAttributes<HTMLElement>>;
+    nextid: React.ForwardRefExoticComponent<HTMLMotionProps<'nextid'> & React.RefAttributes<HTMLElement>>;
+    spacer: React.ForwardRefExoticComponent<HTMLMotionProps<'spacer'> & React.RefAttributes<HTMLElement>>;
+    strike: React.ForwardRefExoticComponent<HTMLMotionProps<'strike'> & React.RefAttributes<HTMLElement>>;
+    xmp: React.ForwardRefExoticComponent<HTMLMotionProps<'xmp'> & React.RefAttributes<HTMLPreElement>>;
+  };
+} 

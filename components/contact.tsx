@@ -1,13 +1,12 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Phone, MapPin } from "lucide-react"
-import { toast } from "@/components/ui/use-toast"
 
 // Phone validation regex
 const PHONE_REGEX = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
@@ -25,11 +24,7 @@ export default function Contact() {
     
     // Validate phone number
     if (!PHONE_REGEX.test(formData.phone)) {
-      toast({
-        title: "Invalid phone number",
-        description: "Please enter a valid phone number in format XXX-XXX-XXXX",
-        variant: "destructive",
-      })
+      alert("Please enter a valid phone number in format XXX-XXX-XXXX")
       return
     }
 
@@ -62,10 +57,7 @@ export default function Contact() {
       })
 
       // Show success message
-      toast({
-        title: "Message sent successfully!",
-        description: "Thank you for contacting us. We'll get back to you within 24 hours.",
-      })
+      alert("Message sent successfully! Thank you for contacting us. We'll get back to you within 24 hours.")
 
       // Reset form
       setFormData({
@@ -77,11 +69,7 @@ export default function Contact() {
       console.log("Contact form submitted ✅", formData)
     } catch (error) {
       console.error("Error submitting form:", error)
-      toast({
-        title: "Error sending message",
-        description: "Please try again later or contact us directly.",
-        variant: "destructive",
-      })
+      alert("Error sending message. Please try again later or contact us directly.")
     } finally {
       setIsSubmitting(false)
     }
