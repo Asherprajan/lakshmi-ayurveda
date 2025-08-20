@@ -7,11 +7,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Phone, MapPin } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 // Phone validation regex
 const PHONE_REGEX = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 
 export default function Contact() {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -24,7 +26,7 @@ export default function Contact() {
     
     // Validate phone number
     if (!PHONE_REGEX.test(formData.phone)) {
-      alert("Please enter a valid phone number in format XXX-XXX-XXXX")
+      alert(t("contact.form.error"))
       return
     }
 
@@ -57,7 +59,7 @@ export default function Contact() {
       })
 
       // Show success message
-      alert("Message sent successfully! Thank you for contacting us. We'll get back to you within 24 hours.")
+      alert(t("contact.form.success"))
 
       // Reset form
       setFormData({
@@ -69,7 +71,7 @@ export default function Contact() {
       console.log("Contact form submitted ✅", formData)
     } catch (error) {
       console.error("Error submitting form:", error)
-      alert("Error sending message. Please try again later or contact us directly.")
+      alert(t("contact.form.error"))
     } finally {
       setIsSubmitting(false)
     }
@@ -87,11 +89,10 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-serif-custom text-4xl md:text-5xl font-bold mb-6" style={{ color: "#3C1F0F" }}>
-            Contact Us
+            {t("contact.title")}
           </h2>
           <p className="font-sans-custom text-xl max-w-3xl mx-auto opacity-80" style={{ color: "#3C1F0F" }}>
-            Begin your journey to wellness. Reach out to us for reservations or any inquiries about our treatments and
-            facilities.
+            {t("contact.description")}
           </p>
         </div>
 
@@ -99,7 +100,7 @@ export default function Contact() {
           {/* Contact Information */}
           <div>
             <h3 className="font-serif-custom text-2xl font-semibold mb-8" style={{ color: "#3C1F0F" }}>
-              Get in Touch
+              {t("contact.get_in_touch")}
             </h3>
 
             <div className="space-y-6">
@@ -109,7 +110,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-sans-custom font-semibold mb-1" style={{ color: "#3C1F0F" }}>
-                    Phone
+                    {t("contact.phone")}
                   </h4>
                   <p className="font-sans-custom" style={{ color: "#3C1F0F", opacity: 0.8 }}>
                     +91 9747205046
@@ -125,7 +126,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-sans-custom font-semibold mb-1" style={{ color: "#3C1F0F" }}>
-                    Address
+                    {t("contact.address")}
                   </h4>
                   <p className="font-sans-custom" style={{ color: "#3C1F0F", opacity: 0.8 }}>
                     Oluppuvila Veedu
@@ -159,7 +160,7 @@ export default function Contact() {
                 <Input
                   type="text"
                   name="name"
-                  placeholder="Your Name"
+                  placeholder={t("contact.form.name_placeholder")}
                   value={formData.name || ""}
                   onChange={handleChange}
                   required
@@ -173,7 +174,7 @@ export default function Contact() {
                 <Input
                   type="tel"
                   name="phone"
-                  placeholder="Your Phone"
+                  placeholder={t("contact.form.phone_placeholder")}
                   value={formData.phone || ""}
                   onChange={handleChange}
                   required
@@ -184,7 +185,7 @@ export default function Contact() {
               <div>
                 <Textarea
                   name="message"
-                  placeholder="Your Message"
+                  placeholder={t("contact.form.message_placeholder")}
                   value={formData.message || ""}
                   onChange={handleChange}
                   required
@@ -203,7 +204,7 @@ export default function Contact() {
                   color: "#F5ECE0",
                 }}
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {isSubmitting ? t("contact.form.sending") : t("contact.form.send_message")}
               </Button>
             </form>
           </div>

@@ -8,6 +8,7 @@ import AboutVilla from "@/components/about-villa"
 import AyurvedaTreatments from "@/components/ayurveda-treatments"
 import Facilities from "@/components/facilities"
 import AttractionsNearby from "@/components/attractions-nearby"
+import Testimonials from "@/components/testimonials"
 import Gallery from "@/components/gallery"
 import OnamEvents from "@/components/onam-events"
 import Contact from "@/components/contact"
@@ -116,11 +117,15 @@ export default function AyurvedaRetreat() {
       {/* Attractions Nearby */}
       <AttractionsNearby  />
 
+      {/* Testimonials */}
+      <Testimonials />
+
       {/* Gallery */}
       <Gallery  />
 
       {/* Celebrate Onam */}
       <OnamEvents />
+      
 
       {/* Our Doctors */}
       <DoctorsSection />

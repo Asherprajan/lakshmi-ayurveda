@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
+import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 
 // Phone validation regex (India + international, 10-15 digits)
 const PHONE_REGEX = /^(\+?\d{1,4}[\s-]?)?(\d{10,15})$/;
@@ -12,6 +13,11 @@ type ContactModalProps = {
   onSubmit?: (data: { name: string; phone: string; message: string }) => void
   title?: string
 }
+
+const WHATSAPP_NUMBER = "919747205046";
+const DISPLAY_PHONE = "+91 97472 05046";
+const TEL_LINK = "tel:+919747205046";
+const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 const ContactModal: React.FC<ContactModalProps> = ({
   open,
@@ -84,7 +90,7 @@ const ContactModal: React.FC<ContactModalProps> = ({
     } catch (error) {
       toast({
         title: "Could not send your enquiry",
-        description: "Please try again later or call us directly at +91 98765 43210.",
+        description: `Please try again later or call us directly at ${DISPLAY_PHONE}.`,
         variant: "destructive",
       })
     } finally {
@@ -211,8 +217,26 @@ const ContactModal: React.FC<ContactModalProps> = ({
                 ? "Enquiry Sent!"
                 : "Send Enquiry"}
           </button>
-          <div className="text-xs text-center text-gray-400 mt-2">
-            Prefer to call? <a href="tel:+919876543210" className="text-[#F1AD60] underline hover:text-[#9A3E0F] transition-colors">+91 98765 43210</a>
+          <div className="flex flex-col items-center gap-2 mt-2">
+            <span className="text-xs text-gray-400">Prefer to call or WhatsApp?</span>
+            <div className="flex gap-4">
+              <a
+                href={TEL_LINK}
+                className="flex items-center gap-1 text-[#F1AD60] hover:text-[#9A3E0F] transition-colors text-sm"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaPhoneAlt className="inline-block mb-[2px]" /> Call {DISPLAY_PHONE}
+              </a>
+              <a
+                href={WHATSAPP_LINK}
+                className="flex items-center gap-1 text-[#25D366] hover:text-[#128C7E] transition-colors text-sm"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaWhatsapp className="inline-block mb-[2px]" /> WhatsApp
+              </a>
+            </div>
           </div>
         </form>
       </div>

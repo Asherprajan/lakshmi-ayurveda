@@ -2,7 +2,6 @@ export interface PackageTreatment {
   title: string
   description: string
   for?: "general" | "women" | "men"
-
 }
 
 export interface AyurvedaPackage {
@@ -18,6 +17,7 @@ export interface AyurvedaPackage {
   notes?: string[]
   costNote: string
   image?: string        
+  pricePerDayEuro?: number  // Changed to euro per day (optional)
 }
 
 // Common reusable strings to optimize data
@@ -33,9 +33,9 @@ const COST_NOTE_CONSULT = COST_NOTE_GENERIC + " Please consult with our Ayurvedi
 export const packages: AyurvedaPackage[] = [
   {
     id: "pumsavana",
-    name: "Pumsavana Package",
+    name: "PUMSAVANA",
     image: "/panchakarma.jpeg",
-    title: "Pumsavana Package",
+    title: "PUMSAVANA", 
     subtitle: "Ayurveda Treatment Package for Infertility",
     duration: "7-30 days",
     objective: "To improve reproductive health and increase fertility in both men and women",
@@ -69,6 +69,7 @@ export const packages: AyurvedaPackage[] = [
       "Patient should continue internal Ayurveda medicines for 6 to 12 months depending upon the severity of the condition."
     ],
     costNote: COST_NOTE_CONSULT,
+    pricePerDayEuro: 100,
   },
   {
     id: "prasanthi",
@@ -100,11 +101,12 @@ export const packages: AyurvedaPackage[] = [
     ],
     notes: [],
     costNote: COST_NOTE_GENERIC,
+    pricePerDayEuro: 100,
   },
   {
     id: "prasada",
     name: "PRASADA",
-    image: "/weight.jpeg",
+    image: "/rejuvination.jpeg",
     title: "PRASADA",
     subtitle: "Ayurveda Skin Complexion Enhancement Package",
     duration: "3-14 days",
@@ -130,11 +132,12 @@ export const packages: AyurvedaPackage[] = [
     ],
     notes: [],
     costNote: COST_NOTE_GENERIC,
+    pricePerDayEuro: 100,
   },
   {
     id: "susandhi",
     name: "SUSANDHI",
-    image: "/rejuvination.jpeg",
+    image: "/joint.jpeg",
     title: "SUSANDHI",
     subtitle: "Joint Protection and Care",
     duration: "7-14 days",
@@ -160,11 +163,12 @@ export const packages: AyurvedaPackage[] = [
     ],
     notes: [],
     costNote: COST_NOTE_GENERIC,
+    pricePerDayEuro: 100,
   },
   {
     id: "krusagathra",
     name: "KRUSAGATHRA",
-    image: "/joint.jpeg",
+    image: "/weight.jpeg",
     title: "KRUSAGATHRA",
     subtitle: "Ayurveda Slimming Package",
     duration: "7-28 days",
@@ -190,6 +194,7 @@ export const packages: AyurvedaPackage[] = [
     ],
     notes: [],
     costNote: COST_NOTE_GENERIC,
+    pricePerDayEuro: 100,
   },
   {
     id: "prasanna",
@@ -222,5 +227,6 @@ export const packages: AyurvedaPackage[] = [
       "This package is designed to enhance beauty, improve skin and hair health, and boost confidence. Our experienced Ayurvedic practitioners will tailor the treatments to meet your individual needs and preferences."
     ],
     costNote: COST_NOTE_CONSULT,
+    pricePerDayEuro: 100,
   },
 ]

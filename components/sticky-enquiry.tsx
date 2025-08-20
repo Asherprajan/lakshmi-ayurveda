@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { MessageCircle, Phone, X } from "lucide-react"
+import { Phone, X } from "lucide-react"
+import { FaWhatsapp } from "react-icons/fa"
 
 export default function StickyEnquiry() {
   const [isVisible, setIsVisible] = useState(false)
@@ -57,7 +58,7 @@ export default function StickyEnquiry() {
               className="flex items-center justify-center w-full py-3 rounded-full text-white font-semibold space-x-2"
               style={{ backgroundColor: "#25D366" }}
             >
-              <MessageCircle className="w-5 h-5" />
+              <FaWhatsapp className="w-5 h-5" />
               <span>WhatsApp</span>
             </motion.button>
             
@@ -89,7 +90,7 @@ export default function StickyEnquiry() {
               className="w-14 h-14 rounded-full shadow-lg flex items-center justify-center"
               style={{ backgroundColor: "#25D366" }}
             >
-              <MessageCircle className="w-6 h-6 text-white" />
+              <FaWhatsapp className="w-6 h-6 text-white" />
             </motion.button>
 
            

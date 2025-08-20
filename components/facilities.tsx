@@ -2,13 +2,14 @@
 
 import { useState, useRef, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
-import { Waves, Building, Users, Car, Wifi, Utensils, Activity } from "lucide-react"
+import { Waves, Building, Users, Car, Wifi, Utensils, Activity,Flower } from "lucide-react"
 import ContactModal from "./contact-modal"
 import React from "react"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const facilities = [
   {
-    icon: <Activity className="w-8 h-8 sm:w-10 sm:h-10" />,
+    icon: <Flower className="w-8 h-8 sm:w-10 sm:h-10" />,
     title: "Yoga Shala",
     description: "Serene yoga pavilion with traditional wooden flooring, natural ventilation and panoramic views of nature.",
     color: "from-[#9A3E0F] to-[#B24D1F]",
@@ -52,6 +53,7 @@ const facilities = [
 ]
 
 export default function Facilities() {
+  const { t } = useLanguage()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const ref = React.useRef<HTMLElement>(null)
   const isInView = useInView(ref as React.RefObject<Element>, { once: true, margin: "-100px" })
@@ -74,13 +76,13 @@ export default function Facilities() {
           className="text-center mb-12 sm:mb-16"
         >
           <span className="inline-block px-4 sm:px-6 py-2 bg-gradient-to-r from-[#3C1F0F]/10 to-[#B24D1F]/10 rounded-full text-[#3C1F0F]/80 font-medium mb-4 sm:mb-6 border border-[#3C1F0F]/20 text-sm sm:text-base">
-            Our Amenities
+            {t("facilities.subtitle")}
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-[#3C1F0F] font-serif leading-tight">
-            World-Class Facilities
+            {t("facilities.title")}
           </h2>
           <p className="text-lg sm:text-xl max-w-3xl mx-auto text-[#3C1F0F]/70 leading-relaxed px-4">
-            Every amenity thoughtfully designed to enhance your wellness journey and ensure complete comfort.
+            {t("facilities.description")}
           </p>
         </motion.div>
 
@@ -148,10 +150,10 @@ export default function Facilities() {
         >
           <div className="bg-gradient-to-r from-[#3C1F0F]/5 to-[#B24D1F]/5 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-[#3C1F0F]/10">
             <h3 className="text-xl sm:text-2xl font-bold text-[#3C1F0F] mb-3 sm:mb-4">
-              Experience Our Facilities
+              {t("facilities.cta.title")}
             </h3>
             <p className="text-[#3C1F0F]/70 mb-6 sm:mb-8 text-sm sm:text-base max-w-2xl mx-auto">
-              Discover how our world-class amenities can enhance your wellness journey and provide the perfect environment for healing and relaxation.
+              {t("facilities.cta.description")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button 
@@ -160,7 +162,7 @@ export default function Facilities() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setContactModalOpen(true)}
               >
-                Book Your Stay
+                {t("facilities.cta.button")}
               </motion.button>  
              
             </div>
@@ -171,7 +173,7 @@ export default function Facilities() {
         open={contactModalOpen}
         onClose={() => setContactModalOpen(false)}
         onSubmit={handleContactSubmit}
-        title="Book Ayurvedic Consultation"
+        title={t("contactModal.title")}
       />
     </section>
   )

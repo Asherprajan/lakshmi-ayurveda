@@ -60,7 +60,7 @@ function HeroSection({
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#F1AD60]/20 to-[#B24D1F]/20 px-6 py-2 rounded-full border border-[#F1AD60]/30 mb-6">
             <div className="w-2 h-2 bg-[#F1AD60] rounded-full animate-pulse" />
             <span className="text-[#F1AD60] font-medium text-sm tracking-wider">
-              PREMIUM AYURVEDA PACKAGES
+             AYURVEDA PACKAGES
             </span>
             <div className="w-2 h-2 bg-[#F1AD60] rounded-full animate-pulse" />
           </div>
@@ -72,7 +72,7 @@ function HeroSection({
           className="font-['Playfair_Display'] text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight"
         >
           <span className="bg-gradient-to-r from-[#F5ECE0] via-[#F1AD60] to-[#F5ECE0] bg-clip-text text-transparent">
-            Luxury Ayurveda
+         Ayurveda
           </span>
           <br />
           <span className="text-[#F5ECE0]">Treatment Packages</span>
@@ -84,7 +84,7 @@ function HeroSection({
           className="text-lg md:text-2xl opacity-90 max-w-3xl mx-auto leading-relaxed font-light"
         >
           Discover holistic healing and rejuvenation with our curated Ayurveda
-          packages, blending ancient wisdom and modern luxury.
+          packages, blending ancient wisdom and modern facilities.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -95,7 +95,7 @@ function HeroSection({
           {[
             { label: "Authentic Treatments", icon: "🌿" },
             { label: "Expert Practitioners", icon: "👩‍⚕️" },
-            { label: "Luxury Accommodation", icon: "🏨" },
+            { label: "Standard Accommodation", icon: "🏨" },
           ].map((item) => (
             <div
               key={item.label}
@@ -255,7 +255,7 @@ function PackageCard({
       <div className="absolute top-6 right-6 z-20">
         <div className="bg-gradient-to-r from-[#B24D1F] to-[#F1AD60] text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg border border-[#3C1F0F]/10 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
-          <span className="relative z-10">PREMIUM</span>
+          <span className="relative z-10">STANDARD</span>
         </div>
       </div>
     </motion.div>

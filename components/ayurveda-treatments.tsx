@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { packages } from "@/lib/packages"
 import ContactModal from "./contact-modal"
 import { useRouter } from "next/navigation"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState(false)
@@ -19,6 +20,7 @@ function useIsMobile() {
 }
 
 export default function AyurvedaTreatments() {
+  const { t } = useLanguage()
   const ref = React.useRef<HTMLElement>(null)
   const isInView = useInView(ref as React.RefObject<Element>, { once: true, margin: "-100px" })
   const isMobile = useIsMobile()
@@ -66,14 +68,13 @@ export default function AyurvedaTreatments() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="inline-block px-6 py-2 bg-gradient-to-r from-[#3C1F0F]/10 to-[#B24D1F]/10 rounded-full text-[#3C1F0F]/80 font-medium mb-8 border border-[#3C1F0F]/20"
           >
-            Holistic Healing
+            {t("treatments.subtitle")}
           </motion.div>
           <h2 className="text-5xl md:text-6xl font-bold mb-8 text-[#3C1F0F] font-serif">
-            Ayurvedic Treatment Packages
+            {t("treatments.title")}
           </h2>
           <p className="text-xl max-w-3xl mx-auto text-[#3C1F0F]/70 leading-relaxed">
-            Experience transformative healing through our carefully curated Ayurvedic treatments, 
-            designed to restore balance and promote holistic wellness.
+            {t("treatments.description")}
           </p>
         </motion.div>
 
@@ -130,7 +131,7 @@ export default function AyurvedaTreatments() {
 
                   {/* Premium Badge */}
                   <div className="absolute top-4 left-4 bg-gradient-to-r from-[#B24D1F] to-[#F1AD60] text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                    PREMIUM
+                    STANDARD
                   </div>
                 </div>
 

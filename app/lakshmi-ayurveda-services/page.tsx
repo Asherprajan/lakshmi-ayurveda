@@ -104,7 +104,7 @@ export default function ServicesPage() {
       name: "Udwarthanam",
       icon: <FaWeight className="w-8 h-8" />,
       description: "Herbal powder massage for weight loss and metabolism boost using special herbal powders and techniques.",
-      benefits: ["Aids weight loss", "Improves metabolism", "Reduces cellulite", "Tones muscles"]
+      benefits: ["Weight loss", "Improves metabolism", "Reduces cellulite", "Tones muscles"]
     },
     {
       name: "Classical Detox Therapies",
@@ -252,7 +252,7 @@ export default function ServicesPage() {
         "Visa and travel assistance",
         "Translation services",
         "Post-treatment follow-up",
-        "Premium accommodation"
+        "Standard accommodation" 
       ]
     }
   ]
@@ -320,7 +320,6 @@ export default function ServicesPage() {
               { id: "therapies", label: "Ayurvedic Therapies", icon: <FaSeedling className="w-5 h-5" /> },
               { id: "yoga", label: "Yoga & Meditation", icon: <FiActivity className="w-5 h-5" /> },
               { id: "tourism", label: "Medical Tourism", icon: <FiGlobe className="w-5 h-5" /> },
-              { id: "packages", label: "Wellness Packages", icon: <FiHeart className="w-5 h-5" /> }
             ].map((tab, i) => (
               <button
                 key={tab.id}

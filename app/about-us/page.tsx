@@ -313,14 +313,14 @@ export default function AboutPage() {
               transition={{ duration: 0.7, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="bg-gradient-to-br from-[#FFF7F0] to-[#F5F5DC] rounded-3xl p-8 h-80 flex items-center justify-center">
-                <div className="text-center text-[#3C1F0F]">
-                  <div className="flex justify-center mb-4">
-                    <Landmark className="w-16 h-16 text-[#8B4513]" />
-                  </div>
-                  <p className="text-lg font-semibold">Ancient Wisdom</p>
-                  <p className="text-sm">Modern Care</p>
-                </div>
+              <div className="bg-gradient-to-br from-[#FFF7F0] to-[#F5F5DC] rounded-3xl p-0 h-96 w-64 mx-auto flex items-center justify-center overflow-hidden">
+                <img
+                  src="/about1.jpeg"
+                  alt="Lakshmi Ayurveda Center Portrait"
+                  className="object-cover w-full h-full rounded-3xl"
+                  style={{ aspectRatio: "3/4" }}
+                  loading="lazy"
+                />
               </div>
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-[#F5F5DC] to-[#FFF7F0] rounded-full opacity-60"></div>
               <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-gradient-to-br from-[#FFF7F0] to-[#F5F5DC] rounded-full opacity-60"></div>

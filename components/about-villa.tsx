@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { motion, Variants } from "framer-motion"
 import ContactModal from "./contact-modal"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const textVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -18,10 +19,12 @@ const textVariants = {
 }
 
 export default function AboutVilla() {
+  const { t } = useLanguage()
   const [isVisible, setIsVisible] = useState(false)
   const [activeTab, setActiveTab] = useState('overview')
   const sectionRef = useRef<HTMLElement>(null)
   const [contactModalOpen, setContactModalOpen] = useState(false)
+  
   useEffect(() => {
     let hasAnimated = false
     const observer = new IntersectionObserver(
@@ -44,7 +47,7 @@ export default function AboutVilla() {
 
   // The text paragraphs to animate
   const aboutTexts = [
-    "A Serene Sanctuary in Nature's Lap. Welcome to Lakshmi Ayurvedic Villa, your tranquil escape nestled in the heart of Kerala.",
+    t("aboutVilla.description"),
     "Surrounded by lush greenery and peaceful gardens, our beautifully designed traditional villa blends classic South Indian architecture with modern comforts. With a peaceful atmosphere and nature all around, it's the perfect setting for healing, relaxation, and self-discovery.",
   ]
 
@@ -64,9 +67,9 @@ export default function AboutVilla() {
   ]
 
   const tabs = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'features', label: 'Features' },
-    { id: 'experiences', label: 'Experiences' }
+    { id: 'overview', label: t("common.learnMore") },
+    { id: 'features', label: t("common.viewAll") },
+    { id: 'experiences', label: t("common.readMore") }
   ]
 
   return (
@@ -84,13 +87,13 @@ export default function AboutVilla() {
           className="text-center mb-12 sm:mb-16"
         >
           <span className="inline-block px-4 sm:px-6 py-2 bg-gradient-to-r from-[#3C1F0F]/10 to-[#B24D1F]/10 rounded-full text-[#3C1F0F]/80 font-medium mb-4 sm:mb-6 border border-[#3C1F0F]/20 text-sm sm:text-base">
-            Our Sanctuary
+            {t("aboutVilla.features.title")}
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-[#3C1F0F] font-serif leading-tight">
-            About The Lakshmi Ayurvedic Villa
+            {t("aboutVilla.title")}
           </h2>
           <p className="text-lg sm:text-xl max-w-3xl mx-auto text-[#3C1F0F]/70 leading-relaxed px-4">
-            A Serene Sanctuary in Nature's Lap
+            {t("aboutVilla.subtitle")}
           </p>
         </motion.div>
 
@@ -104,7 +107,7 @@ export default function AboutVilla() {
           >
             <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl">
               <img
-                src="/g5.jpeg"
+                src="/g20.jpeg"
                 alt="Lakshmi Ayurvedic Villa"
                 className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] object-cover"
               />

@@ -6,7 +6,7 @@ import ContactModal from '../contact-modal';
 const DoctorsSection = () => {
   const doctor = {
     name: "Anand P",
-    qualification: "BAMS Shalya Tantra (General Surgery)", 
+    qualification: "BAMS", 
     experience: "31 Years (Ayurveda & Panchakarma)",
     specialization: [
       "Skin Diseases",

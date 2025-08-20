@@ -3,6 +3,8 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
+import { useLanguage } from "@/contexts/LanguageContext"
+import LanguageSwitcher from "./LanguageSwitcher"
 
 // Theme colors
 const PRIMARY_BG = "bg-[#1a0e07]"
@@ -13,15 +15,6 @@ const PRIMARY_ACCENT_BG = "bg-[#F1AD60]"
 const PRIMARY_ACCENT_HOVER = "hover:text-[#F1AD60]"
 const NAV_FONT = "font-['Manrope']"
 const NAV_FONT_BOLD = "font-['Playfair_Display'] font-bold"
-
-// Navigation links (no "current" property, highlight by route if needed)
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about-us", label: "About" },
-  { href: "/lakshmi-ayurveda-services", label: "Services" },
-  { href: "/lakshmi-ayurveda-packages", label: "Packages" },
-  { href: "/contact-us", label: "Contact" },
-]
 
 // Icon components
 const MenuIcon = () => (
@@ -37,8 +30,20 @@ const CloseIcon = () => (
 )
 
 export default function Header() {
+  const { t } = useLanguage()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+
+  // Navigation links with translations
+  const navLinks = [
+    { href: "/", label: t("nav.home") },
+    { href: "/about-us", label: t("nav.about") },
+    { href: "/lakshmi-ayurveda-services", label: t("nav.services") },
+    { href: "/lakshmi-ayurveda-packages", label: t("nav.packages") },
+    { href: "/gallery", label: t("Gallery") },
+    { href: "/contact-us", label: t("nav.contact") },
+    
+  ]
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10)
@@ -76,44 +81,53 @@ export default function Header() {
       <nav className="px-4 lg:px-8 py-2.5 max-w-7xl mx-auto" aria-label="Main navigation">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group" aria-label="Lakshmi Ayurveda Home">
+          <Link href="/" className="flex items-center gap-3" aria-label="Lakshmi Ayurveda Home">
             <Image
               src="/nav.png"
               alt="Lakshmi Ayurveda Logo"
-              width={48}
-              height={48}
-              className="h-12 w-auto transition-transform group-hover:scale-105 drop-shadow-lg"
+              width={64}
+              height={64}
+              className="h-12 w-auto lg:h-16 lg:w-auto drop-shadow-lg"
               priority
             />
-           
           </Link>
 
           {/* Desktop Nav */}
-          <ul className="hidden lg:flex items-center gap-8 ml-8">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`text-base px-1.5 py-0.5 transition-colors duration-200 border-b-2 border-transparent ${PRIMARY_ACCENT} ${PRIMARY_ACCENT_HOVER} hover:border-[#F1AD60]`}
-                  style={{ color: "#F1AD60" }} // Ensure text is visible
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="hidden lg:flex items-center gap-8">
+            <ul className="flex items-center gap-8">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`text-base px-1.5 py-0.5 transition-colors duration-200 border-b-2 border-transparent ${PRIMARY_ACCENT} ${PRIMARY_ACCENT_HOVER} hover:border-[#F1AD60]`}
+                    style={{ color: "#F1AD60" }} // Ensure text is visible
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            
+            {/* Language Switcher */}
+            <div className="ml-4">
+              <LanguageSwitcher />
+            </div>
+          </div>
 
           {/* Mobile Menu Button */}
-          <button
-            type="button"
-            className="lg:hidden inline-flex items-center justify-center p-2 text-[#F1AD60] hover:bg-[#F1AD60]/10 focus:outline-none focus:ring-2 focus:ring-[#F1AD60] rounded-lg transition-all duration-200"
-            aria-controls="mobile-menu"
-            aria-expanded={isMenuOpen}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            onClick={toggleMenu}
-          >
-            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
-          </button>
+          <div className="lg:hidden flex items-center gap-2">
+            <LanguageSwitcher />
+            <button
+              type="button"
+              className="inline-flex items-center justify-center p-2 text-[#F1AD60] hover:bg-[#F1AD60]/10 focus:outline-none focus:ring-2 focus:ring-[#F1AD60] rounded-lg transition-all duration-200"
+              aria-controls="mobile-menu"
+              aria-expanded={isMenuOpen}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              onClick={toggleMenu}
+            >
+              {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import React from 'react'
 import './globals.css'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 
 export const metadata: Metadata = {
   title: 'Lakshmi Ayurveda | Authentic Kerala Ayurvedic Retreat for Panchakarma, Wellness, and Holistic Healing',
@@ -54,7 +55,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   )

@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, Variants } from "framer-motion"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const imageVariants = {
   initial: { scale: 1.08, opacity: 0 },
@@ -60,6 +61,8 @@ const GRADIENT_TEXT_STYLE = {
 };
 
 export default function Hero() {
+  const { t } = useLanguage()
+  
   const handleScrollDown = () => {
     // Scroll to next section smoothly
     const nextSection = document.querySelector('[data-hero-scroll-target]') || document.body;
@@ -76,8 +79,8 @@ export default function Hero() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const h1Text = "Welcome to Lakshmi Ayurveda.";
-  const h3Text = "Yoga and Medical Tourism.";
+  const h1Text = t("hero.title");
+  const h3Text = t("hero.subtitle");
 
   return (
     <section className="relative h-screen flex flex-col items-center justify-center text-white">
@@ -163,7 +166,7 @@ export default function Hero() {
           <ChevronDown className="w-8 h-8 text-white/80 group-hover:text-[#F1AD60] transition-colors duration-200" />
         </span>
         <span className="text-xs mt-1 text-white/70 group-hover:text-[#F1AD60] transition-colors duration-200 font-sans-custom">
-          Scroll Down
+          {t("hero.scrollButton")}
         </span>
       </button>
     </section>
