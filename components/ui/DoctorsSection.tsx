@@ -1,11 +1,17 @@
+"use client"
+
 import DoctorProfile from './DoctorProfile';
-import { motion } from 'framer-motion';
-import { Heart, Sparkles, Users } from 'lucide-react';
-import { useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { Heart, Sparkles, Users, Award, Clock, Star, ArrowRight, Stethoscope } from 'lucide-react';
+import { useState, useRef } from 'react';
 import ContactModal from '../contact-modal';
+
 const DoctorsSection = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
   const doctor = {
-    name: "Anand P",
+    name: "Dr. Anand P",
     qualification: "BAMS", 
     experience: "31 Years (Ayurveda & Panchakarma)",
     specialization: [
@@ -15,141 +21,209 @@ const DoctorsSection = () => {
       "General Medicine",
       "Preventive Care"
     ],
-    imageUrl: "/doc.jpeg"
+    imageUrl: "/doc.jpeg",
+    achievements: [
+      "Certified Panchakarma Specialist",
+      "Traditional Ayurveda Expert",
+      "Holistic Wellness Practitioner"
+    ]
   };
-  const [contactModalOpen, setContactModalOpen] = useState(false)
+
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+  
   const handleContactSubmit = async (data: { name: string; phone: string; message: string }) => {
-    console.log("Contact form submitted:", data)
-  }
+    console.log("Contact form submitted:", data);
+  };
+
+  const stats = [
+    {
+      icon: Users,
+      number: "15,000+",
+      label: "Patients Healed",
+      description: "Successfully treated patients worldwide",
+      gradient: "from-emerald-500 to-teal-600"
+    },
+    {
+      icon: Clock,
+      number: "31",
+      label: "Years Excellence",
+      description: "Decades of dedicated practice",
+      gradient: "from-blue-500 to-indigo-600"
+    },
+    {
+      icon: Award,
+      number: "98%",
+      label: "Success Rate",
+      description: "Patient satisfaction & recovery",
+      gradient: "from-purple-500 to-pink-600"
+    },
+    {
+      icon: Star,
+      number: "5.0",
+      label: "Patient Rating",
+      description: "Consistently excellent reviews",
+      gradient: "from-amber-500 to-orange-600"
+    }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <section className="relative py-24 px-4 overflow-hidden" style={{ backgroundColor: "#FFF7F0" }}>
-      {/* Enhanced Decorative Elements */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-[#9A3E0F]/8 to-[#B24D1F]/5 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-gradient-to-tl from-[#F1AD60]/8 to-[#F5ECE0]/5 rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2" />
-      <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-[#B24D1F]/5 to-[#3C1F0F]/5 rounded-full blur-2xl transform -translate-x-1/2 -translate-y-1/2" />
+    <section 
+      ref={ref}
+      className="relative py-32 px-4 overflow-hidden bg-gradient-to-br from-[#FFF9F5] via-[#FFF7F0] to-[#FDF6F0]"
+    >
+      {/* Advanced Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-[#9A3E0F]/6 via-[#B24D1F]/4 to-transparent rounded-full blur-3xl transform -translate-x-1/3 -translate-y-1/3 animate-pulse" />
+        <div className="absolute bottom-0 right-0 w-[700px] h-[700px] bg-gradient-to-tl from-[#F1AD60]/8 via-[#F5ECE0]/6 to-transparent rounded-full blur-3xl transform translate-x-1/3 translate-y-1/3" />
+        <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-gradient-to-r from-[#B24D1F]/3 to-[#3C1F0F]/3 rounded-full blur-2xl transform -translate-x-1/2 -translate-y-1/2 rotate-45" />
+        
+        {/* Floating Elements */}
+        <motion.div 
+          animate={{ 
+            y: [0, -20, 0],
+            rotate: [0, 5, 0]
+          }}
+          transition={{ 
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-20 right-20 w-16 h-16 bg-gradient-to-br from-[#F1AD60]/20 to-[#B24D1F]/20 rounded-2xl backdrop-blur-sm"
+        />
+        <motion.div 
+          animate={{ 
+            y: [0, 15, 0],
+            rotate: [0, -3, 0]
+          }}
+          transition={{ 
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+          className="absolute bottom-32 left-16 w-12 h-12 bg-gradient-to-br from-[#9A3E0F]/15 to-[#F5ECE0]/15 rounded-full backdrop-blur-sm"
+        />
+      </div>
       
       <div className="relative max-w-7xl mx-auto">
-        {/* Section Header */}
+        {/* Enhanced Section Header */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="text-center mb-24"
         >
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <Heart className="w-6 h-6 text-[#B24D1F]" />
-            <span className="inline-block px-4 py-2 bg-gradient-to-r from-[#F5ECE0]/80 to-[#F1AD60]/30 text-[#B24D1F] rounded-full font-sans-custom text-sm font-semibold border border-[#B24D1F]/20">
-              Expert Care
+          <motion.div 
+            variants={itemVariants}
+            className="flex items-center justify-center gap-3 mb-8"
+          >
+            <div className="w-12 h-12 bg-gradient-to-br from-[#9A3E0F] to-[#B24D1F] rounded-full flex items-center justify-center shadow-lg">
+              <Stethoscope className="w-6 h-6 text-white" />
+            </div>
+            <span className="inline-block px-6 py-3 bg-gradient-to-r from-[#F5ECE0]/90 to-[#F1AD60]/40 text-[#B24D1F] rounded-full font-sans-custom text-sm font-bold border-2 border-[#B24D1F]/20 shadow-sm">
+              Meet Our Ayurvedic Expert
             </span>
-            <Sparkles className="w-6 h-6 text-[#B24D1F]" />
-          </div>
+            <div className="w-12 h-12 bg-gradient-to-br from-[#F1AD60] to-[#F5ECE0] rounded-full flex items-center justify-center shadow-lg">
+              <Heart className="w-6 h-6 text-[#9A3E0F]" />
+            </div>
+          </motion.div>
           
-          <h2 className="font-serif-custom text-4xl md:text-6xl font-bold mb-6 text-[#3C1F0F] leading-tight">
-            Meet Our Expert Doctor
-          </h2>
+          <motion.h2 
+            variants={itemVariants}
+            className="font-serif-custom text-5xl md:text-7xl font-bold mb-8 text-[#3C1F0F] leading-tight bg-gradient-to-r from-[#3C1F0F] to-[#5D2F17] bg-clip-text text-transparent"
+          >
+            Healing Through Ancient Wisdom
+          </motion.h2>
           
-          <p className="font-sans-custom text-xl max-w-3xl mx-auto text-[#3C1F0F]/70 leading-relaxed">
-            Experience the wisdom of traditional Ayurvedic healing combined with modern medical expertise
-            under the guidance of our distinguished practitioner.
-          </p>
-          
-          {/* Stats */}
-          <div className="flex flex-wrap justify-center gap-8 mt-12">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#9A3E0F] to-[#B24D1F] rounded-full mb-3 mx-auto">
-                <Users className="w-8 h-8 text-white" />
-              </div>
-              <div className="font-serif-custom text-3xl font-bold text-[#3C1F0F]">10,000+</div>
-              <div className="font-sans-custom text-sm text-[#3C1F0F]/70">Patients Treated</div>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#B24D1F] to-[#F1AD60] rounded-full mb-3 mx-auto">
-                <Heart className="w-8 h-8 text-white" />
-              </div>
-              <div className="font-serif-custom text-3xl font-bold text-[#3C1F0F]">31</div>
-              <div className="font-sans-custom text-sm text-[#3C1F0F]/70">Years Experience</div>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#F1AD60] to-[#F5ECE0] rounded-full mb-3 mx-auto">
-                <Sparkles className="w-8 h-8 text-[#3C1F0F]" />
-              </div>
-              <div className="font-serif-custom text-3xl font-bold text-[#3C1F0F]">5.0</div>
-              <div className="font-sans-custom text-sm text-[#3C1F0F]/70">Patient Rating</div>
-            </motion.div>
+          <motion.p 
+            variants={itemVariants}
+            className="font-sans-custom text-xl md:text-2xl max-w-4xl mx-auto text-[#3C1F0F]/80 leading-relaxed mb-8"
+          >
+            Experience the profound transformation that comes from authentic Ayurvedic healing, 
+            guided by decades of expertise and unwavering dedication to your wellness journey.
+          </motion.p>
+
+          <motion.div 
+            variants={itemVariants}
+            className="flex flex-wrap justify-center gap-4 text-sm font-medium text-[#B24D1F]"
+          >
+            <div className="flex items-center gap-2 bg-white/50 px-4 py-2 rounded-full border border-[#B24D1F]/20">
+              <Sparkles className="w-4 h-4" />
+              <span>Traditional Methods</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/50 px-4 py-2 rounded-full border border-[#B24D1F]/20">
+              <Heart className="w-4 h-4" />
+              <span>Holistic Approach</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/50 px-4 py-2 rounded-full border border-[#B24D1F]/20">
+              <Award className="w-4 h-4" />
+              <span>Proven Results</span>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Enhanced Stats Grid */}
+       
+
+        {/* Doctor Profile with Enhanced Animation */}
+        <motion.div 
+          initial={{ opacity: 0, y: 60, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 60, scale: 0.95 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+          className="max-w-6xl mx-auto mb-20"
+        >
+          <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-2 shadow-2xl border border-white/50">
+            <DoctorProfile
+              name={doctor.name}
+              qualification={doctor.qualification}
+              experience={doctor.experience}
+              specialization={doctor.specialization}
+              imageUrl={doctor.imageUrl}
+            />
           </div>
         </motion.div>
 
-        {/* Doctor Profile */}
+        {/* Revolutionary CTA Section */}
         <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="max-w-6xl mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="relative"
         >
-          <DoctorProfile
-            name={doctor.name}
-            qualification={doctor.qualification}
-            experience={doctor.experience}
-            specialization={doctor.specialization}
-            imageUrl={doctor.imageUrl}
-          />
-        </motion.div>
-
-        {/* Bottom CTA */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center mt-16"
-        >
-          <div className="bg-gradient-to-r from-[#F5ECE0]/50 to-[#F1AD60]/20 rounded-2xl p-8 border border-[#3C1F0F]/10">
-            <h3 className="font-serif-custom text-2xl md:text-3xl font-bold text-[#3C1F0F] mb-4">
-              Ready to Begin Your Healing Journey?
-            </h3>
-            <p className="font-sans-custom text-lg text-[#3C1F0F]/70 mb-6 max-w-2xl mx-auto">
-              Book your consultation with Dr. Anand P and experience the transformative power of authentic Ayurvedic healing.
-            </p>
-            <motion.button    
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-[#9A3E0F] to-[#B24D1F] text-white font-sans-custom font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:from-[#B24D1F] hover:to-[#9A3E0F]"
-              onClick={() => setContactModalOpen(true)}
-            >
-              Schedule Your Consultation
-            </motion.button>
-          </div>
+          
         </motion.div>
       </div>
+
       <ContactModal
         open={contactModalOpen}
         onClose={() => setContactModalOpen(false)}
         onSubmit={handleContactSubmit}
-        title="Book Ayurvedic Consultation"
+        title="Begin Your Ayurvedic Healing Journey"
       />
-            </section>
+    </section>
   );
 };
 
